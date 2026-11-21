@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <h:head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><ui:insert name="title">CondiGestion</ui:insert></title>
+        <h:outputStylesheet library="css" name="condigestion.css" />
+    </h:head>
+
+    <h:body>
+        <div class="app-shell">
+            <!-- BARRE LATÉRALE FIXE -->
+            <aside class="sidebar" aria-label="Navigation principale">
+                <div class="brand-box">
+                    <div class="brand-title">CondiGestion</div>
+                    <div class="brand-subtitle">Gestion &amp; Conditionnement</div>
+                </div>
+
+                <nav class="sidebar-menu">
+                    <div class="menu-section-title">Espace de travail</div>
+
+                    <h:link outcome="/admin-dashboard"
+                            value="Tableau de bord"
+                            styleClass="#{pageContextBean.active('/admin-dashboard') ? 'active' : ''}"
+                            rendered="#{loginBean.utilisateurConnecte ne null and (loginBean.utilisateurConnecte.role eq 'ADMIN' or loginBean.utilisateurConnecte.role eq 'ADMINISTRATEUR')}" />
+
+                    <h:link outcome="/gestionnaire-dashboard"
+                            value="Tableau de bord"
+                            styleClass="#{pageContextBean.active('/gestionnaire-dashboard') ? 'active' : ''}"
+                            rendered="#{loginBean.utilisateurConnecte ne null and loginBean.utilisateurConnecte.role eq 'GESTIONNAIRE'}" />
+
+                    <h:link outcome="/operateur-dashboard"
+                            value="Tableau de bord"
+                            styleClass="#{pageContextBean.active('/operateur-dashboard') ? 'active' : ''}"
+                            rendered="#{loginBean.utilisateurConnecte ne null and (loginBean.utilisateurConnecte.role eq 'OPERATEUR' or loginBean.utilisateurConnecte.role eq 'OPÉRATEUR')}" />
+
+                    <h:link outcome="/index"
+                            value="Tableau de bord"
+                            styleClass="#{pageContextBean.active('/index') ? 'active' : ''}"
+                            rendered="#{loginBean.utilisateurConnecte ne null and (loginBean.utilisateurConnecte.role eq 'CONSULTANT' or loginBean.utilisateurConnecte.role eq 'UTILISATEUR')}" />
+
+                    <h:link outcome="/view/operationsConditionnement/List"
+                            value="Opérations"
+                            styleClass="#{pageContextBean.active('/view/operationsConditionnement/') ? 'active' : ''}" />
+
+                    <h:link outcome="/view/mouvementsStock/List"
+                            value="Mouvements de stock"
+                            styleClass="#{pageContextBean.active('/view/mouvementsStock/') ? 'active' : ''}" />
+
+                    <h:link outcome="/view/alertes/List"
+                            value="Alertes"
+                            styleClass="#{pageContextBean.active('/view/alertes/') ? 'active' : ''}" />
+
+                    <!-- SECTION GESTIONNAIRE & ADMIN -->
+                    <h:panelGroup rendered="#{loginBean.utilisateurConnecte ne null and (loginBean.utilisateurConnecte.role eq 'ADMIN' or loginBean.utilisateurConnecte.role eq 'ADMINISTRATEUR' or loginBean.utilisateurConnecte.role eq 'GESTIONNAIRE')}">
+                        <div class="menu-section-title">Catalogue &amp; Stocks</div>
+                        <h:link outcome="/view/articles/List"
+                                value="Articles"
+                                styleClass="#{pageContextBean.active('/view/articles/') ? 'active' : ''}" />
+                        <h:link outcome="/view/categories/List"
+                                value="Catégories"
+                                styleClass="#{pageContextBean.active('/view/categories/') ? 'active' : ''}" />
+                        <h:link outcome="/view/conditionnements/List"
+                                value="Conditionnements"
+                                styleClass="#{pageContextBean.active('/view/conditionnements/') ? 'active' : ''}" />
+                        <h:link outcome="/view/conditionnementsCatalogue/List"
+                                value="Catalogue"
+                                styleClass="#{pageContextBean.active('/view/conditionnementsCatalogue/') ? 'active' : ''}" />
+                        <h:link outcome="/view/compositionsConditionnements/List"
+                                value="Compositions"
+                                styleClass="#{pageContextBean.active('/view/compositionsConditionnements/') ? 'active' : ''}" />
+                        <h:link outcome="/view/stocks/List"
+                                value="Stocks"
+                                styleClass="#{pageContextBean.active('/view/stocks/') ? 'active' : ''}" />
+                        <h:link outcome="/view/ecartsStock/List"
+                                value="Écarts de stock"
+                                styleClass="#{pageContextBean.active('/view/ecartsStock/') ? 'active' : ''}" />
+                        <h:link outcome="/view/unites/List"
+                                value="Unités"
+                                styleClass="#{pageContextBean.active('/view/unites/') ? 'active' : ''}" />
+                    </h:panelGroup>
+
+                    <!-- SECTION CONFIGURATION (ADMIN) -->
+                    <h:panelGroup rendered="#{loginBean.utilisateurConnecte ne null and (loginBean.utilisateurConnecte.role eq 'ADMIN' or loginBean.utilisateurConnecte.role eq 'ADMINISTRATEUR')}">
+                        <div class="menu-section-title">Configuration</div>
+                        <h:link outcome="/view/utilisateurs/List"
+                                value="Utilisateurs"
+                                styleClass="#{pageContextBean.active('/view/utilisateurs/') ? 'active' : ''}" />
+                        <h:link outcome="/view/parametres/List"
+                                value="Paramètres"
+                                styleClass="#{pageContextBean.active('/view/parametres/') ? 'active' : ''}" />
+                        <h:link outcome="/view/historiqueActions/List"
+                                value="Historique"
+                                styleClass="#{pageContextBean.active('/view/historiqueActions/') ? 'active' : ''}" />
+                    </h:panelGroup>
+                </nav>
+
+                <!-- RAPPORTS PDF -->
+                <h:form styleClass="sidebar-menu report-actions">
+                    <div class="menu-section-title">Rapports PDF</div>
+                    <h:commandLink action="#{rapportBean.exporterPdfStocks}" value="État des stocks" />
+                    <h:commandLink action="#{rapportBean.exporterPdfOperations}" value="Récapitulatif des opérations" />
+                </h:form>
+
+                <!-- PIED DE SIDEBAR : PROFIL & DÉCONNEXION -->
+                <div class="user-footer">
+                    <div class="user-profile">
+                        <div class="user-avatar" aria-hidden="true">CG</div>
+                        <div>
+                            <div class="user-email">#{loginBean.email}</div>
+                            <div class="user-role">#{loginBean.utilisateurConnecte.role}</div>
+                        </div>
+                    </div>
+                    <h:form>
+                        <h:commandLink action="#{loginBean.seDeconnecter}"
+                                       value="Se déconnecter"
+                                       styleClass="btn-logout" />
+                    </h:form>
+                </div>
+            </aside>
+
+            <!-- ZONE DE CONTENU -->
+            <div class="main-wrapper">
+                <header class="topbar">
+                    <div class="topbar-inner">
+                        <div class="breadcrumb">
+                            <span>CondiGestion</span>
+                            <span class="breadcrumb-separator">/</span>
+                            <strong>
+                                <ui:insert name="breadcrumb">#{pageContextBean.breadcrumb}</ui:insert>
+                            </strong>
+                        </div>
+                        <div class="topbar-profile">
+                            <span class="topbar-user">
+                                #{loginBean.utilisateurConnecte.prenom} #{loginBean.utilisateurConnecte.nom}
+                            </span>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="content-container">
+                <h:messages styleClass="app-messages" errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" globalOnly="true" rendered="#{pageContextBean.globalMessageAreaVisible}" layout="table"/>
+                    <h:panelGroup layout="block"
+                                  styleClass="crud-page-heading"
+                                  rendered="#{pageContextBean.crudPage}">
+                        <div class="page-eyebrow">CondiGestion</div>
+                        <h1>#{pageContextBean.pageHeading}</h1>
+                        <p class="dashboard-lead">#{pageContextBean.pageDescription}</p>
+                    </h:panelGroup>
+
+                    <ui:insert name="body">Contenu</ui:insert>
+                </main>
+            </div>
+        </div>
+    </h:body>
+</html>
+
+
+

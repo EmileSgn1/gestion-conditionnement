@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewAlertesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewAlertesLabel_typeAlerte}"/>
+                    <h:outputText value="#{not empty alertesController.selected.typeAlerte ? alertesController.selected.typeAlerte : '—'}" title="#{bundle.ViewAlertesTitle_typeAlerte}" />
+                    <h:outputText value="#{bundle.ViewAlertesLabel_message}"/>
+                    <h:outputText value="#{not empty alertesController.selected.message ? alertesController.selected.message : '—'}" title="#{bundle.ViewAlertesTitle_message}" />
+                    <h:outputText value="#{bundle.ViewAlertesLabel_dateAlerte}"/>
+                    <h:outputText value="#{alertesController.selected.dateAlerte}" title="#{bundle.ViewAlertesTitle_dateAlerte}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewAlertesLabel_niveau}"/>
+                    <h:outputText value="#{not empty alertesController.selected.niveau ? alertesController.selected.niveau : '—'}" title="#{bundle.ViewAlertesTitle_niveau}" />
+                    <h:outputText value="#{bundle.ViewAlertesLabel_lu}"/>
+                    <h:outputText value="#{alertesController.selected.lu ? 'Oui' : 'Non'}" title="#{bundle.ViewAlertesTitle_lu}"/>
+                    <h:outputText value="#{bundle.ViewAlertesLabel_actif}"/>
+                    <h:outputText value="#{alertesController.selected.actif ? 'Oui' : 'Non'}" title="#{bundle.ViewAlertesTitle_actif}"/>
+                    <h:outputText value="#{bundle.ViewAlertesLabel_sourceKey}"/>
+                    <h:outputText value="#{not empty alertesController.selected.sourceKey ? alertesController.selected.sourceKey : '—'}" title="#{bundle.ViewAlertesTitle_sourceKey}" />
+                    <h:outputText value="#{bundle.ViewAlertesLabel_retiree}"/>
+                    <h:outputText value="#{alertesController.selected.retiree ? 'Oui' : 'Non'}" title="#{bundle.ViewAlertesTitle_retiree}"/>
+                    <h:outputText value="#{bundle.ViewAlertesLabel_articleId}"/>
+                    <h:outputText value="#{not empty alertesController.selected.articleId ? alertesController.selected.articleId.nom : '—'}" title="#{bundle.ViewAlertesTitle_articleId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{alertesController.destroyAndView}" value="#{bundle.ViewAlertesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewAlertesEditLink}"/>
+                <br />
+                <h:commandLink action="#{alertesController.prepareCreate}" value="#{bundle.ViewAlertesCreateLink}" />
+                <br />
+                <h:commandLink action="#{alertesController.prepareList}" value="#{bundle.ViewAlertesShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

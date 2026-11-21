@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListHistoriqueTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{historiqueController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListHistoriqueEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{historiqueController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{historiqueController.pagination.pageFirstItem + 1} à #{historiqueController.pagination.pageLastItem + 1} sur #{historiqueController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{historiqueController.previous}" value="#{bundle.Previous} #{historiqueController.pagination.pageSize}" rendered="#{historiqueController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{historiqueController.next}" value="#{bundle.Next} #{historiqueController.pagination.pageSize}" rendered="#{historiqueController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{historiqueController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriqueTitle_action}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.action ? item.action : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriqueTitle_details}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.details ? item.details : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriqueTitle_dateAction}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateAction}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriqueTitle_entite}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.entite ? item.entite : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriqueTitle_utilisateurId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.utilisateurId ? item.utilisateurId.nom : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{historiqueController.prepareView}" value="#{bundle.ListHistoriqueViewLink}"/>
+                            <h:outputText value=" "/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

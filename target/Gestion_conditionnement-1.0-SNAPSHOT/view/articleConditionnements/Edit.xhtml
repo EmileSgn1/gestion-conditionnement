@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditArticleConditionnementsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditArticleConditionnementsLabel_quantiteParUnite}" for="quantiteParUnite" />
+                    <h:inputText id="quantiteParUnite" value="#{articleConditionnementsController.selected.quantiteParUnite}" title="#{bundle.EditArticleConditionnementsTitle_quantiteParUnite}" required="true" requiredMessage="#{bundle.EditArticleConditionnementsRequiredMessage_quantiteParUnite}"/>
+                    <h:outputLabel value="#{bundle.EditArticleConditionnementsLabel_stockConditionne}" for="stockConditionne" />
+                    <h:inputText id="stockConditionne" value="#{articleConditionnementsController.selected.stockConditionne}" title="#{bundle.EditArticleConditionnementsTitle_stockConditionne}" required="true" requiredMessage="#{bundle.EditArticleConditionnementsRequiredMessage_stockConditionne}"/>
+                    <h:outputLabel value="#{bundle.EditArticleConditionnementsLabel_seuilAlerte}" for="seuilAlerte" />
+                    <h:inputText id="seuilAlerte" value="#{articleConditionnementsController.selected.seuilAlerte}" title="#{bundle.EditArticleConditionnementsTitle_seuilAlerte}" required="true" requiredMessage="#{bundle.EditArticleConditionnementsRequiredMessage_seuilAlerte}"/>
+                    <h:outputLabel value="#{bundle.EditArticleConditionnementsLabel_actif}" for="actif" />
+                    <h:selectBooleanCheckbox id="actif" value="#{articleConditionnementsController.selected.actif}"/>
+                    <h:outputLabel value="#{bundle.EditArticleConditionnementsLabel_articleId}" for="articleId" />
+                    <h:selectOneMenu id="articleId" value="#{articleConditionnementsController.selected.articleId}" title="#{bundle.EditArticleConditionnementsTitle_articleId}" required="true" requiredMessage="#{bundle.EditArticleConditionnementsRequiredMessage_articleId}" converter="#{articlesController.converter}">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditArticleConditionnementsLabel_conditionnementId}" for="conditionnementId" />
+                    <h:selectOneMenu id="conditionnementId" value="#{articleConditionnementsController.selected.conditionnementId}" title="#{bundle.EditArticleConditionnementsTitle_conditionnementId}" required="true" requiredMessage="#{bundle.EditArticleConditionnementsRequiredMessage_conditionnementId}" converter="#{conditionnementsCatalogueController.converter}">
+                        <f:selectItems value="#{conditionnementsCatalogueController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{articleConditionnementsController.update}" value="#{bundle.EditArticleConditionnementsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditArticleConditionnementsViewLink}"/>
+                <br />
+                <h:commandLink action="#{articleConditionnementsController.prepareList}" value="#{bundle.EditArticleConditionnementsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

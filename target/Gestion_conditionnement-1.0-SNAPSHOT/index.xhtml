@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Accueil</ui:define>
+        <ui:define name="breadcrumb">Accueil</ui:define>
+        <ui:define name="body">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">CondiGestion</h1>
+                    <p class="dashboard-lead">Gestion des articles, des stocks et des opérations de conditionnement.</p>
+                </div>
+            </div>
+            <section class="dashboard-section" aria-labelledby="modules-heading">
+                <h2 id="modules-heading">Modules</h2>
+                <div class="dashboard-action-grid">
+                    <h:link outcome="/view/articles/List" value="Articles" styleClass="dashboard-action"/>
+                    <h:link outcome="/view/stocks/List" value="Stocks" styleClass="dashboard-action"/>
+                    <h:link outcome="/view/operationsConditionnement/List" value="Opérations de conditionnement" styleClass="dashboard-action"/>
+                </div>
+            </section>
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+

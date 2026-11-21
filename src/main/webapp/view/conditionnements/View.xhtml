@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewConditionnementsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewConditionnementsLabel_quantiteBase}"/>
+                    <h:outputText value="#{not empty conditionnementsController.selected.quantiteBase ? conditionnementsController.selected.quantiteBase : '—'}" title="#{bundle.ViewConditionnementsTitle_quantiteBase}" />
+                    <h:outputText value="#{bundle.ViewConditionnementsLabel_coefficient}"/>
+                    <h:outputText value="#{not empty conditionnementsController.selected.coefficient ? conditionnementsController.selected.coefficient : '—'}" title="#{bundle.ViewConditionnementsTitle_coefficient}" />
+                    <h:outputText value="#{bundle.ViewConditionnementsLabel_actif}"/>
+                    <h:outputText value="#{conditionnementsController.selected.actif ? 'Oui' : 'Non'}" title="#{bundle.ViewConditionnementsTitle_actif}"/>
+                    <h:outputText value="#{bundle.ViewConditionnementsLabel_articleId}"/>
+                    <h:outputText value="#{not empty conditionnementsController.selected.articleId ? conditionnementsController.selected.articleId.nom : '—'}" title="#{bundle.ViewConditionnementsTitle_articleId}"/>
+                    <h:outputText value="#{bundle.ViewConditionnementsLabel_articleSourceId}"/>
+                    <h:outputText value="#{not empty conditionnementsController.selected.articleSourceId ? conditionnementsController.selected.articleSourceId.nom : '—'}" title="#{bundle.ViewConditionnementsTitle_articleSourceId}"/>
+                    <h:outputText value="#{bundle.ViewConditionnementsLabel_typeConditionnementId}"/>
+                    <h:outputText value="#{not empty conditionnementsController.selected.typeConditionnementId ? conditionnementsController.selected.typeConditionnementId.libelle : '—'}" title="#{bundle.ViewConditionnementsTitle_typeConditionnementId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{conditionnementsController.destroyAndView}" value="#{bundle.ViewConditionnementsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewConditionnementsEditLink}"/>
+                <br />
+                <h:commandLink action="#{conditionnementsController.prepareCreate}" value="#{bundle.ViewConditionnementsCreateLink}" />
+                <br />
+                <h:commandLink action="#{conditionnementsController.prepareList}" value="#{bundle.ViewConditionnementsShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

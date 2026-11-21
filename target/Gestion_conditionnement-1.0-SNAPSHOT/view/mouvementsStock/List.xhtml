@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListMouvementsStockTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{mouvementsStockController.prepareCreate}" value="#{bundle.ListMouvementsStockCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{mouvementsStockController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListMouvementsStockEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{mouvementsStockController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{mouvementsStockController.pagination.pageFirstItem + 1} à #{mouvementsStockController.pagination.pageLastItem + 1} sur #{mouvementsStockController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{mouvementsStockController.previous}" value="#{bundle.Previous} #{mouvementsStockController.pagination.pageSize}" rendered="#{mouvementsStockController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{mouvementsStockController.next}" value="#{bundle.Next} #{mouvementsStockController.pagination.pageSize}" rendered="#{mouvementsStockController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{mouvementsStockController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMouvementsStockTitle_typeMouvement}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.typeMouvement ? item.typeMouvement : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMouvementsStockTitle_quantite}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.quantite ? item.quantite : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMouvementsStockTitle_motif}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.motif ? item.motif : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMouvementsStockTitle_reference}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.reference ? item.reference : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMouvementsStockTitle_dateMouvement}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateMouvement}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMouvementsStockTitle_articleId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.articleId ? item.articleId.nom : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMouvementsStockTitle_operationId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.operationId and not empty item.operationId.reference ? item.operationId.reference : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMouvementsStockTitle_utilisateurId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.utilisateurId ? item.utilisateurId.nom : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{mouvementsStockController.prepareView}" value="#{bundle.ListMouvementsStockViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{mouvementsStockController.prepareEdit}" value="#{bundle.ListMouvementsStockEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{mouvementsStockController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListMouvementsStockDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

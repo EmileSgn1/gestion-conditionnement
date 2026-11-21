@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditConditionnementsCatalogueTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_code}" for="code" />
+                    <h:inputText id="code" value="#{conditionnementsCatalogueController.selected.code}" title="#{bundle.EditConditionnementsCatalogueTitle_code}" required="true" requiredMessage="#{bundle.EditConditionnementsCatalogueRequiredMessage_code}"/>
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_designation}" for="designation" />
+                    <h:inputText id="designation" value="#{conditionnementsCatalogueController.selected.designation}" title="#{bundle.EditConditionnementsCatalogueTitle_designation}" required="true" requiredMessage="#{bundle.EditConditionnementsCatalogueRequiredMessage_designation}"/>
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_capacite}" for="capacite" />
+                    <h:inputText id="capacite" value="#{conditionnementsCatalogueController.selected.capacite}" title="#{bundle.EditConditionnementsCatalogueTitle_capacite}" />
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_uniteCapacite}" for="uniteCapacite" />
+                    <h:inputText id="uniteCapacite" value="#{conditionnementsCatalogueController.selected.uniteCapacite}" title="#{bundle.EditConditionnementsCatalogueTitle_uniteCapacite}" />
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_longueur}" for="longueur" />
+                    <h:inputText id="longueur" value="#{conditionnementsCatalogueController.selected.longueur}" title="#{bundle.EditConditionnementsCatalogueTitle_longueur}" required="true" requiredMessage="#{bundle.EditConditionnementsCatalogueRequiredMessage_longueur}"/>
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_largeur}" for="largeur" />
+                    <h:inputText id="largeur" value="#{conditionnementsCatalogueController.selected.largeur}" title="#{bundle.EditConditionnementsCatalogueTitle_largeur}" required="true" requiredMessage="#{bundle.EditConditionnementsCatalogueRequiredMessage_largeur}"/>
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_hauteur}" for="hauteur" />
+                    <h:inputText id="hauteur" value="#{conditionnementsCatalogueController.selected.hauteur}" title="#{bundle.EditConditionnementsCatalogueTitle_hauteur}" required="true" requiredMessage="#{bundle.EditConditionnementsCatalogueRequiredMessage_hauteur}"/>
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_poids}" for="poids" />
+                    <h:inputText id="poids" value="#{conditionnementsCatalogueController.selected.poids}" title="#{bundle.EditConditionnementsCatalogueTitle_poids}" />
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_materiau}" for="materiau" />
+                    <h:inputText id="materiau" value="#{conditionnementsCatalogueController.selected.materiau}" title="#{bundle.EditConditionnementsCatalogueTitle_materiau}" />
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_actif}" for="actif" />
+                    <h:selectBooleanCheckbox id="actif" value="#{conditionnementsCatalogueController.selected.actif}"/>
+                    <h:outputLabel value="#{bundle.EditConditionnementsCatalogueLabel_typeConditionnementId}" for="typeConditionnementId" />
+                    <h:selectOneMenu id="typeConditionnementId" value="#{conditionnementsCatalogueController.selected.typeConditionnementId}" title="#{bundle.EditConditionnementsCatalogueTitle_typeConditionnementId}" required="true" requiredMessage="#{bundle.EditConditionnementsCatalogueRequiredMessage_typeConditionnementId}" converter="#{typesConditionnementController.converter}">
+                        <f:selectItems value="#{typesConditionnementController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{conditionnementsCatalogueController.update}" value="#{bundle.EditConditionnementsCatalogueSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditConditionnementsCatalogueViewLink}"/>
+                <br />
+                <h:commandLink action="#{conditionnementsCatalogueController.prepareList}" value="#{bundle.EditConditionnementsCatalogueShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

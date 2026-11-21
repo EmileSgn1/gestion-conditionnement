@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewEcartsStockTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewEcartsStockLabel_operationId}"/>
+                    <h:outputText value="#{operationsConditionnementController.libellePourId(ecartsStockController.selected.operationId)}" title="#{bundle.ViewEcartsStockTitle_operationId}"/>
+                    <h:outputText value="#{bundle.ViewEcartsStockLabel_quantiteAttendue}"/>
+                    <h:outputText value="#{not empty ecartsStockController.selected.quantiteAttendue ? ecartsStockController.selected.quantiteAttendue : '—'}" title="#{bundle.ViewEcartsStockTitle_quantiteAttendue}" />
+                    <h:outputText value="#{bundle.ViewEcartsStockLabel_quantiteConstatee}"/>
+                    <h:outputText value="#{not empty ecartsStockController.selected.quantiteConstatee ? ecartsStockController.selected.quantiteConstatee : '—'}" title="#{bundle.ViewEcartsStockTitle_quantiteConstatee}" />
+                    <h:outputText value="#{bundle.ViewEcartsStockLabel_difference}"/>
+                    <h:outputText value="#{not empty ecartsStockController.selected.difference ? ecartsStockController.selected.difference : '—'}" title="#{bundle.ViewEcartsStockTitle_difference}" />
+                    <h:outputText value="#{bundle.ViewEcartsStockLabel_justification}"/>
+                    <h:outputText value="#{not empty ecartsStockController.selected.justification ? ecartsStockController.selected.justification : '—'}" title="#{bundle.ViewEcartsStockTitle_justification}" />
+                    <h:outputText value="#{bundle.ViewEcartsStockLabel_statut}"/>
+                    <h:outputText value="#{not empty ecartsStockController.selected.statut ? ecartsStockController.selected.statut : '—'}" title="#{bundle.ViewEcartsStockTitle_statut}" />
+                    <h:outputText value="#{bundle.ViewEcartsStockLabel_validePar}"/>
+                    <h:outputText value="#{utilisateursController.libellePourId(ecartsStockController.selected.validePar)}" title="#{bundle.ViewEcartsStockTitle_validePar}"/>
+                    <h:outputText value="#{bundle.ViewEcartsStockLabel_dateConstat}"/>
+                    <h:outputText value="#{ecartsStockController.selected.dateConstat}" title="#{bundle.ViewEcartsStockTitle_dateConstat}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ecartsStockController.destroyAndView}" value="#{bundle.ViewEcartsStockDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewEcartsStockEditLink}"/>
+                <br />
+                <h:commandLink action="#{ecartsStockController.prepareCreate}" value="#{bundle.ViewEcartsStockCreateLink}" />
+                <br />
+                <h:commandLink action="#{ecartsStockController.prepareList}" value="#{bundle.ViewEcartsStockShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

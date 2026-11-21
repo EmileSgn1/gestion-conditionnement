@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core">
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">Réglages de l’application</ui:define>
+        <ui:define name="breadcrumb">Paramètres</ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form settings-list">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{parametresController.items.rowCount == 0}">
+                    Aucun réglage n’est configuré. Les clés sont gérées par l’application.
+                </h:panelGroup>
+                <h:panelGroup layout="block" rendered="#{parametresController.items.rowCount > 0}">
+                    <div class="settings-list-intro">Modifiez une valeur pour ajuster le comportement de l’application. Les clés de réglage sont fixes.</div>
+                    <div class="settings-count">#{parametresController.pagination.itemsCount} réglage(s)</div>
+                    <h:dataTable value="#{parametresController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table settings-table">
+                        <h:column>
+                            <f:facet name="header">Réglage</f:facet>
+                            <span class="setting-key">#{item.cle}</span>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Valeur</f:facet>
+                            <h:outputText value="#{not empty item.valeur ? item.valeur : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Description</f:facet>
+                            <h:outputText value="#{not empty item.description ? item.description : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+                            <h:commandLink action="#{parametresController.prepareEdit}" value="Modifier" styleClass="btn-secondary"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

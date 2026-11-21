@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditStocksTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditStocksLabel_quantite}" for="quantite" />
+                    <h:inputText id="quantite" value="#{stocksController.selected.quantite}" title="#{bundle.EditStocksTitle_quantite}" required="true" requiredMessage="#{bundle.EditStocksRequiredMessage_quantite}"/>
+                    <h:outputLabel value="#{bundle.EditStocksLabel_articleId}" for="articleId" />
+                    <h:selectOneMenu id="articleId" value="#{stocksController.selected.articleId}" title="#{bundle.EditStocksTitle_articleId}"  converter="#{articlesController.converter}">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{stocksController.update}" value="#{bundle.EditStocksSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditStocksViewLink}"/>
+                <br />
+                <h:commandLink action="#{stocksController.prepareList}" value="#{bundle.EditStocksShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

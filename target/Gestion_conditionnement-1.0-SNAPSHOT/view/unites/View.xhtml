@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewUnitesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewUnitesLabel_code}"/>
+                    <h:outputText value="#{not empty unitesController.selected.code ? unitesController.selected.code : '—'}" title="#{bundle.ViewUnitesTitle_code}" />
+                    <h:outputText value="#{bundle.ViewUnitesLabel_sigle}"/>
+                    <h:outputText value="#{not empty unitesController.selected.sigle ? unitesController.selected.sigle : '—'}" title="#{bundle.ViewUnitesTitle_sigle}" />
+                    <h:outputText value="#{bundle.ViewUnitesLabel_libelle}"/>
+                    <h:outputText value="#{not empty unitesController.selected.libelle ? unitesController.selected.libelle : '—'}" title="#{bundle.ViewUnitesTitle_libelle}" />
+                    <h:outputText value="#{bundle.ViewUnitesLabel_nom}"/>
+                    <h:outputText value="#{not empty unitesController.selected.nom ? unitesController.selected.nom : '—'}" title="#{bundle.ViewUnitesTitle_nom}" />
+                    <h:outputText value="#{bundle.ViewUnitesLabel_actif}"/>
+                    <h:outputText value="#{unitesController.selected.actif ? 'Oui' : 'Non'}" title="#{bundle.ViewUnitesTitle_actif}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{unitesController.destroyAndView}" value="#{bundle.ViewUnitesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewUnitesEditLink}"/>
+                <br />
+                <h:commandLink action="#{unitesController.prepareCreate}" value="#{bundle.ViewUnitesCreateLink}" />
+                <br />
+                <h:commandLink action="#{unitesController.prepareList}" value="#{bundle.ViewUnitesShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

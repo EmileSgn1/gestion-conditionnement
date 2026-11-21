@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateUtilisateursTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    <h:outputLabel value="#{bundle.CreateUtilisateursLabel_nom}" for="nom" />
+                    <h:inputText id="nom" value="#{utilisateursController.selected.nom}" title="#{bundle.CreateUtilisateursTitle_nom}" required="true" requiredMessage="#{bundle.CreateUtilisateursRequiredMessage_nom}"/>
+                    <h:outputLabel value="#{bundle.CreateUtilisateursLabel_prenom}" for="prenom" />
+                    <h:inputText id="prenom" value="#{utilisateursController.selected.prenom}" title="#{bundle.CreateUtilisateursTitle_prenom}" required="true" requiredMessage="#{bundle.CreateUtilisateursRequiredMessage_prenom}"/>
+                    <h:outputLabel value="#{bundle.CreateUtilisateursLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{utilisateursController.selected.email}" title="#{bundle.CreateUtilisateursTitle_email}" required="true" requiredMessage="#{bundle.CreateUtilisateursRequiredMessage_email}"/>
+                    <h:outputLabel value="#{bundle.CreateUtilisateursLabel_motDePasse}" for="motDePasse" />
+                    <h:inputSecret id="motDePasse" value="#{utilisateursController.selected.motDePasse}" title="#{bundle.CreateUtilisateursTitle_motDePasse}" required="true" requiredMessage="#{bundle.CreateUtilisateursRequiredMessage_motDePasse}" redisplay="false">
+                        <f:passThroughAttribute name="autocomplete" value="new-password"/>
+                    </h:inputSecret>
+                    <h:outputLabel value="#{bundle.CreateUtilisateursLabel_actif}" for="actif" />
+                    <h:selectBooleanCheckbox id="actif" value="#{utilisateursController.selected.actif}"/>
+                    <h:outputLabel value="#{bundle.CreateUtilisateursLabel_role}" for="role" />
+                    <h:selectOneMenu id="role" value="#{utilisateursController.selected.role}" title="#{bundle.CreateUtilisateursTitle_role}" required="true" requiredMessage="#{bundle.CreateUtilisateursRequiredMessage_role}">
+                        <f:selectItem itemLabel="Choisir un rôle" itemValue="" noSelectionOption="true"/>
+                        <f:selectItems value="#{utilisateursController.rolesDisponibles}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{utilisateursController.create}" value="#{bundle.CreateUtilisateursSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{utilisateursController.prepareList}" value="#{bundle.CreateUtilisateursShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

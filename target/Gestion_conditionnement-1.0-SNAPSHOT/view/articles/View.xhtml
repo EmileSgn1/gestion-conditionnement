@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewArticlesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewArticlesLabel_reference}"/>
+                    <h:outputText value="#{not empty articlesController.selected.reference ? articlesController.selected.reference : '—'}" title="#{bundle.ViewArticlesTitle_reference}" />
+                    <h:outputText value="#{bundle.ViewArticlesLabel_nom}"/>
+                    <h:outputText value="#{not empty articlesController.selected.nom ? articlesController.selected.nom : '—'}" title="#{bundle.ViewArticlesTitle_nom}" />
+                    <h:outputText value="#{bundle.ViewArticlesLabel_description}"/>
+                    <h:outputText value="#{not empty articlesController.selected.description ? articlesController.selected.description : '—'}" title="#{bundle.ViewArticlesTitle_description}" />
+                    <h:outputText value="#{bundle.ViewArticlesLabel_actif}"/>
+                    <h:outputText value="#{articlesController.selected.actif ? 'Oui' : 'Non'}" title="#{bundle.ViewArticlesTitle_actif}"/>
+                    <h:outputText value="#{bundle.ViewArticlesLabel_dateCreation}"/>
+                    <h:outputText value="#{articlesController.selected.dateCreation}" title="#{bundle.ViewArticlesTitle_dateCreation}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewArticlesLabel_dateModification}"/>
+                    <h:outputText value="#{articlesController.selected.dateModification}" title="#{bundle.ViewArticlesTitle_dateModification}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewArticlesLabel_prix}"/>
+                    <h:outputText value="#{not empty articlesController.selected.prix ? articlesController.selected.prix : '—'}" title="#{bundle.ViewArticlesTitle_prix}" />
+                    <h:outputText value="#{bundle.ViewArticlesLabel_stockMin}"/>
+                    <h:outputText value="#{not empty articlesController.selected.stockMin ? articlesController.selected.stockMin : '—'}" title="#{bundle.ViewArticlesTitle_stockMin}" />
+                    <h:outputText value="#{bundle.ViewArticlesLabel_categorieId}"/>
+                    <h:outputText value="#{not empty articlesController.selected.categorieId ? articlesController.selected.categorieId.nom : '—'}" title="#{bundle.ViewArticlesTitle_categorieId}"/>
+                    <h:outputText value="#{bundle.ViewArticlesLabel_uniteId}"/>
+                    <h:outputText value="#{not empty articlesController.selected.uniteId ? articlesController.selected.uniteId.sigle : '—'}" title="#{bundle.ViewArticlesTitle_uniteId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{articlesController.destroyAndView}" value="#{bundle.ViewArticlesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewArticlesEditLink}"/>
+                <br />
+                <h:commandLink action="#{articlesController.prepareCreate}" value="#{bundle.ViewArticlesCreateLink}" />
+                <br />
+                <h:commandLink action="#{articlesController.prepareList}" value="#{bundle.ViewArticlesShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

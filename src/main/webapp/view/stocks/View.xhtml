@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewStocksTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewStocksLabel_quantite}"/>
+                    <h:outputText value="#{not empty stocksController.selected.quantite ? stocksController.selected.quantite : '—'}" title="#{bundle.ViewStocksTitle_quantite}" />
+                    <h:outputText value="#{bundle.ViewStocksLabel_derniereMaj}"/>
+                    <h:outputText value="#{stocksController.selected.derniereMaj}" title="#{bundle.ViewStocksTitle_derniereMaj}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewStocksLabel_dateModification}"/>
+                    <h:outputText value="#{stocksController.selected.dateModification}" title="#{bundle.ViewStocksTitle_dateModification}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewStocksLabel_articleId}"/>
+                    <h:outputText value="#{not empty stocksController.selected.articleId ? stocksController.selected.articleId.nom : '—'}" title="#{bundle.ViewStocksTitle_articleId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{stocksController.destroyAndView}" value="#{bundle.ViewStocksDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewStocksEditLink}"/>
+                <br />
+                <h:commandLink action="#{stocksController.prepareCreate}" value="#{bundle.ViewStocksCreateLink}" />
+                <br />
+                <h:commandLink action="#{stocksController.prepareList}" value="#{bundle.ViewStocksShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

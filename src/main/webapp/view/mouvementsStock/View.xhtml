@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewMouvementsStockTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewMouvementsStockLabel_typeMouvement}"/>
+                    <h:outputText value="#{not empty mouvementsStockController.selected.typeMouvement ? mouvementsStockController.selected.typeMouvement : '—'}" title="#{bundle.ViewMouvementsStockTitle_typeMouvement}" />
+                    <h:outputText value="#{bundle.ViewMouvementsStockLabel_quantite}"/>
+                    <h:outputText value="#{not empty mouvementsStockController.selected.quantite ? mouvementsStockController.selected.quantite : '—'}" title="#{bundle.ViewMouvementsStockTitle_quantite}" />
+                    <h:outputText value="#{bundle.ViewMouvementsStockLabel_motif}"/>
+                    <h:outputText value="#{not empty mouvementsStockController.selected.motif ? mouvementsStockController.selected.motif : '—'}" title="#{bundle.ViewMouvementsStockTitle_motif}" />
+                    <h:outputText value="#{bundle.ViewMouvementsStockLabel_reference}"/>
+                    <h:outputText value="#{not empty mouvementsStockController.selected.reference ? mouvementsStockController.selected.reference : '—'}" title="#{bundle.ViewMouvementsStockTitle_reference}" />
+                    <h:outputText value="#{bundle.ViewMouvementsStockLabel_dateMouvement}"/>
+                    <h:outputText value="#{mouvementsStockController.selected.dateMouvement}" title="#{bundle.ViewMouvementsStockTitle_dateMouvement}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewMouvementsStockLabel_articleId}"/>
+                    <h:outputText value="#{not empty mouvementsStockController.selected.articleId ? mouvementsStockController.selected.articleId.nom : '—'}" title="#{bundle.ViewMouvementsStockTitle_articleId}"/>
+                    <h:outputText value="#{bundle.ViewMouvementsStockLabel_operationId}"/>
+                    <h:outputText value="#{not empty mouvementsStockController.selected.operationId and not empty mouvementsStockController.selected.operationId.reference ? mouvementsStockController.selected.operationId.reference : '—'}" title="#{bundle.ViewMouvementsStockTitle_operationId}"/>
+                    <h:outputText value="#{bundle.ViewMouvementsStockLabel_utilisateurId}"/>
+                    <h:outputText value="#{not empty mouvementsStockController.selected.utilisateurId ? mouvementsStockController.selected.utilisateurId.nom : '—'}" title="#{bundle.ViewMouvementsStockTitle_utilisateurId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{mouvementsStockController.destroyAndView}" value="#{bundle.ViewMouvementsStockDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewMouvementsStockEditLink}"/>
+                <br />
+                <h:commandLink action="#{mouvementsStockController.prepareCreate}" value="#{bundle.ViewMouvementsStockCreateLink}" />
+                <br />
+                <h:commandLink action="#{mouvementsStockController.prepareList}" value="#{bundle.ViewMouvementsStockShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

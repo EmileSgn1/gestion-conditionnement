@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEcartsStockTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditEcartsStockLabel_operationId}" for="operationId" />
+                    <h:selectOneMenu id="operationId" value="#{ecartsStockController.selected.operationId}" converter="#{ecartsStockController.converter}" required="true"><f:selectItems value="#{operationsConditionnementController.itemsAvailableSelectOneById}" /></h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditEcartsStockLabel_quantiteAttendue}" for="quantiteAttendue" />
+                    <h:inputText id="quantiteAttendue" value="#{ecartsStockController.selected.quantiteAttendue}" title="#{bundle.EditEcartsStockTitle_quantiteAttendue}" required="true" requiredMessage="#{bundle.EditEcartsStockRequiredMessage_quantiteAttendue}"/>
+                    <h:outputLabel value="#{bundle.EditEcartsStockLabel_quantiteConstatee}" for="quantiteConstatee" />
+                    <h:inputText id="quantiteConstatee" value="#{ecartsStockController.selected.quantiteConstatee}" title="#{bundle.EditEcartsStockTitle_quantiteConstatee}" required="true" requiredMessage="#{bundle.EditEcartsStockRequiredMessage_quantiteConstatee}"/>
+                    <h:outputLabel value="#{bundle.EditEcartsStockLabel_difference}" for="difference" />
+                    <h:inputText id="difference" value="#{ecartsStockController.selected.difference}" title="#{bundle.EditEcartsStockTitle_difference}" required="true" requiredMessage="#{bundle.EditEcartsStockRequiredMessage_difference}"/>
+                    <h:outputLabel value="#{bundle.EditEcartsStockLabel_justification}" for="justification" />
+                    <h:inputText id="justification" value="#{ecartsStockController.selected.justification}" title="#{bundle.EditEcartsStockTitle_justification}" />
+                    <h:outputLabel value="#{bundle.EditEcartsStockLabel_statut}" for="statut" />
+                    <h:inputText id="statut" value="#{ecartsStockController.selected.statut}" title="#{bundle.EditEcartsStockTitle_statut}" />
+                    <h:outputLabel value="#{bundle.EditEcartsStockLabel_validePar}" for="validePar" />
+                    <h:selectOneMenu id="validePar" value="#{ecartsStockController.selected.validePar}" converter="#{ecartsStockController.converter}"><f:selectItems value="#{utilisateursController.itemsAvailableSelectOneById}" /></h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{ecartsStockController.update}" value="#{bundle.EditEcartsStockSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditEcartsStockViewLink}"/>
+                <br />
+                <h:commandLink action="#{ecartsStockController.prepareList}" value="#{bundle.EditEcartsStockShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

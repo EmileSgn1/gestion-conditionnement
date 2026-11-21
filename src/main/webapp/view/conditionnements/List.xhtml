@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListConditionnementsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{conditionnementsController.prepareCreate}" value="#{bundle.ListConditionnementsCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{conditionnementsController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListConditionnementsEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{conditionnementsController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{conditionnementsController.pagination.pageFirstItem + 1} à #{conditionnementsController.pagination.pageLastItem + 1} sur #{conditionnementsController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{conditionnementsController.previous}" value="#{bundle.Previous} #{conditionnementsController.pagination.pageSize}" rendered="#{conditionnementsController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{conditionnementsController.next}" value="#{bundle.Next} #{conditionnementsController.pagination.pageSize}" rendered="#{conditionnementsController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{conditionnementsController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsTitle_quantiteBase}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.quantiteBase ? item.quantiteBase : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsTitle_coefficient}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.coefficient ? item.coefficient : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsTitle_actif}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.actif ? 'Oui' : 'Non'}" styleClass="#{item.actif ? 'status-pill status-positive' : 'status-pill status-neutral'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsTitle_articleId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.articleId ? item.articleId.nom : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsTitle_articleSourceId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.articleSourceId ? item.articleSourceId.nom : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsTitle_typeConditionnementId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.typeConditionnementId ? item.typeConditionnementId.libelle : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{conditionnementsController.prepareView}" value="#{bundle.ListConditionnementsViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{conditionnementsController.prepareEdit}" value="#{bundle.ListConditionnementsEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{conditionnementsController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListConditionnementsDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

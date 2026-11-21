@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewNotificationsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewNotificationsLabel_utilisateurId}"/>
+                    <h:outputText value="#{utilisateursController.libellePourId(notificationsController.selected.utilisateurId)}" title="#{bundle.ViewNotificationsTitle_utilisateurId}"/>
+                    <h:outputText value="#{bundle.ViewNotificationsLabel_titre}"/>
+                    <h:outputText value="#{not empty notificationsController.selected.titre ? notificationsController.selected.titre : '—'}" title="#{bundle.ViewNotificationsTitle_titre}" />
+                    <h:outputText value="#{bundle.ViewNotificationsLabel_message}"/>
+                    <h:outputText value="#{not empty notificationsController.selected.message ? notificationsController.selected.message : '—'}" title="#{bundle.ViewNotificationsTitle_message}" />
+                    <h:outputText value="#{bundle.ViewNotificationsLabel_typeNotification}"/>
+                    <h:outputText value="#{not empty notificationsController.selected.typeNotification ? notificationsController.selected.typeNotification : '—'}" title="#{bundle.ViewNotificationsTitle_typeNotification}" />
+                    <h:outputText value="#{bundle.ViewNotificationsLabel_lue}"/>
+                    <h:outputText value="#{notificationsController.selected.lue ? 'Oui' : 'Non'}" title="#{bundle.ViewNotificationsTitle_lue}"/>
+                    <h:outputText value="#{bundle.ViewNotificationsLabel_dateCreation}"/>
+                    <h:outputText value="#{notificationsController.selected.dateCreation}" title="#{bundle.ViewNotificationsTitle_dateCreation}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{notificationsController.destroyAndView}" value="#{bundle.ViewNotificationsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewNotificationsEditLink}"/>
+                <br />
+                <h:commandLink action="#{notificationsController.prepareCreate}" value="#{bundle.ViewNotificationsCreateLink}" />
+                <br />
+                <h:commandLink action="#{notificationsController.prepareList}" value="#{bundle.ViewNotificationsShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

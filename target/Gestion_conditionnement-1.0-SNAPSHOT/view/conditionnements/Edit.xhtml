@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditConditionnementsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditConditionnementsLabel_quantiteBase}" for="quantiteBase" />
+                    <h:inputText id="quantiteBase" value="#{conditionnementsController.selected.quantiteBase}" title="#{bundle.EditConditionnementsTitle_quantiteBase}" />
+                    <h:outputLabel value="#{bundle.EditConditionnementsLabel_coefficient}" for="coefficient" />
+                    <h:inputText id="coefficient" value="#{conditionnementsController.selected.coefficient}" title="#{bundle.EditConditionnementsTitle_coefficient}" required="true" requiredMessage="#{bundle.EditConditionnementsRequiredMessage_coefficient}"/>
+                    <h:outputLabel value="#{bundle.EditConditionnementsLabel_actif}" for="actif" />
+                    <h:selectBooleanCheckbox id="actif" value="#{conditionnementsController.selected.actif}"/>
+                    <h:outputLabel value="#{bundle.EditConditionnementsLabel_articleId}" for="articleId" />
+                    <h:selectOneMenu id="articleId" value="#{conditionnementsController.selected.articleId}" title="#{bundle.EditConditionnementsTitle_articleId}"  converter="#{articlesController.converter}">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditConditionnementsLabel_articleSourceId}" for="articleSourceId" />
+                    <h:selectOneMenu id="articleSourceId" value="#{conditionnementsController.selected.articleSourceId}" title="#{bundle.EditConditionnementsTitle_articleSourceId}"  converter="#{articlesController.converter}">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditConditionnementsLabel_typeConditionnementId}" for="typeConditionnementId" />
+                    <h:selectOneMenu id="typeConditionnementId" value="#{conditionnementsController.selected.typeConditionnementId}" title="#{bundle.EditConditionnementsTitle_typeConditionnementId}"  converter="#{typesConditionnementController.converter}">
+                        <f:selectItems value="#{typesConditionnementController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{conditionnementsController.update}" value="#{bundle.EditConditionnementsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditConditionnementsViewLink}"/>
+                <br />
+                <h:commandLink action="#{conditionnementsController.prepareList}" value="#{bundle.EditConditionnementsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

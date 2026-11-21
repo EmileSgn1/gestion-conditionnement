@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Espace opérateur — CondiGestion</ui:define>
+        <ui:define name="breadcrumb">Espace opérateur</ui:define>
+
+        <ui:define name="body">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Espace opérateur</h1>
+                    <p class="dashboard-lead">
+                        Accédez aux opérations de conditionnement, aux mouvements de stock et aux alertes.
+                    </p>
+                </div>
+
+                <div class="dashboard-actions">
+                    <h:link outcome="/view/operationsConditionnement/Create"
+                            value="+ Nouvelle opération"
+                            styleClass="btn-primary" />
+                </div>
+            </div>
+
+            <section class="dashboard-section" aria-labelledby="actions-operateur">
+                <div class="dashboard-card-header">
+                    <div>
+                        <div class="kpi-label">Poste de travail</div>
+                        <h2 id="actions-operateur">Activité de l’atelier</h2>
+                    </div>
+                </div>
+
+                <div class="dashboard-action-grid">
+                    <h:link outcome="/view/operationsConditionnement/List"
+                            value="Opérations de conditionnement"
+                            styleClass="dashboard-action" />
+                    <h:link outcome="/view/mouvementsStock/List"
+                            value="Mouvements de stock"
+                            styleClass="dashboard-action" />
+                    <h:link outcome="/view/alertes/List"
+                            value="Alertes"
+                            styleClass="dashboard-action" />
+                </div>
+            </section>
+        </ui:define>
+    </ui:composition>
+</html>
+
+

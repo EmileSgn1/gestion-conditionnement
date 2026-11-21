@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListStocksTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{stocksController.prepareCreate}" value="#{bundle.ListStocksCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{stocksController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListStocksEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{stocksController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{stocksController.pagination.pageFirstItem + 1} à #{stocksController.pagination.pageLastItem + 1} sur #{stocksController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{stocksController.previous}" value="#{bundle.Previous} #{stocksController.pagination.pageSize}" rendered="#{stocksController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{stocksController.next}" value="#{bundle.Next} #{stocksController.pagination.pageSize}" rendered="#{stocksController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{stocksController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListStocksTitle_quantite}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.quantite ? item.quantite : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListStocksTitle_derniereMaj}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.derniereMaj}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListStocksTitle_articleId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.articleId ? item.articleId.nom : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{stocksController.prepareView}" value="#{bundle.ListStocksViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{stocksController.prepareEdit}" value="#{bundle.ListStocksEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{stocksController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListStocksDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

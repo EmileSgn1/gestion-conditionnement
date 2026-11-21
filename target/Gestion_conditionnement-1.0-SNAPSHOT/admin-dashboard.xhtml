@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Tableau de bord — CondiGestion</ui:define>
+        <ui:define name="breadcrumb">Tableau de bord</ui:define>
+
+        <ui:define name="body">
+            <!-- En-tête de page -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">
+                        Bonjour #{loginBean.utilisateurConnecte.prenom}
+                    </h1>
+                    <p class="dashboard-lead">
+                        Voici le point sur l’activité de votre atelier.
+                    </p>
+                </div>
+
+                <div class="dashboard-actions">
+                    <h:form>
+                        <h:commandButton value="Exporter l’état des stocks en PDF"
+                                         action="#{rapportBean.exporterPdfStocks}"
+                                         styleClass="btn-secondary" />
+                    </h:form>
+                    <h:link outcome="/view/operationsConditionnement/Create"
+                            value="+ Créer une opération"
+                            styleClass="btn-primary" />
+                </div>
+            </div>
+
+            <!-- Grille KPI -->
+            <section class="kpi-grid" aria-label="Indicateurs clés">
+                <div class="kpi-card highlight">
+                    <div class="kpi-label">Articles au catalogue</div>
+                    <div class="kpi-value">
+                        <h:outputText value="#{dashboardBean.totalArticles}"
+                                      rendered="#{dashboardBean.totalArticles ne null}" />
+                        <h:outputText value="—"
+                                      rendered="#{dashboardBean.totalArticles eq null}" />
+                    </div>
+                    <div class="kpi-sub">Références enregistrées</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-label">Opérations réalisées</div>
+                    <div class="kpi-value">
+                        <h:outputText value="#{dashboardBean.totalOperations}"
+                                      rendered="#{dashboardBean.totalOperations ne null}" />
+                        <h:outputText value="—"
+                                      rendered="#{dashboardBean.totalOperations eq null}" />
+                    </div>
+                    <div class="kpi-sub">Depuis le démarrage de l’activité</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-label">Lignes de stock</div>
+                    <div class="kpi-value">
+                        <h:outputText value="#{dashboardBean.totalStocks}"
+                                      rendered="#{dashboardBean.totalStocks ne null}" />
+                        <h:outputText value="—"
+                                      rendered="#{dashboardBean.totalStocks eq null}" />
+                    </div>
+                    <div class="kpi-sub">Références suivies</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-label">Alertes à suivre</div>
+                    <div class="kpi-value">
+                        <h:outputText value="#{dashboardBean.totalAlertes}"
+                                      rendered="#{dashboardBean.totalAlertes ne null}" />
+                        <h:outputText value="—"
+                                      rendered="#{dashboardBean.totalAlertes eq null}" />
+                    </div>
+                    <div class="kpi-sub">Alertes encore actives</div>
+                </div>
+            </section>
+
+            <!-- Carte Opérations récentes -->
+            <section class="data-card" aria-label="Opérations récentes">
+                <div class="dashboard-card-header">
+                    <div>
+                        <div class="kpi-label">Activité</div>
+                        <h2>Opérations récentes</h2>
+                    </div>
+                    <h:link outcome="/view/operationsConditionnement/List"
+                            value="Consulter les opérations"
+                            styleClass="text-link" />
+                </div>
+
+                <h:dataTable value="#{dashboardBean.dernieresOperations}"
+                             var="op"
+                             styleClass="modern-table"
+                             rendered="#{not empty dashboardBean.dernieresOperations}">
+                    <h:column>
+                        <f:facet name="header">Référence</f:facet>
+                        <h:outputText value="#{not empty op.reference ? op.reference : 'Opération #'.concat(op.id)}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Date</f:facet>
+                        <h:outputText value="#{op.dateOperation}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                        </h:outputText>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Article source</f:facet>
+                        <h:outputText value="#{not empty op.articleSourceId ? op.articleSourceId.nom : '—'}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Quantité produite</f:facet>
+                        <h:outputText value="#{op.quantiteProduite}" />
+                    </h:column>
+                </h:dataTable>
+
+                <h:panelGroup layout="block"
+                              styleClass="empty-state"
+                              rendered="#{empty dashboardBean.dernieresOperations and not dashboardBean.operationsIndisponibles}">
+                    Aucune opération n’est enregistrée pour le moment.
+                </h:panelGroup>
+
+                <h:panelGroup layout="block"
+                              styleClass="empty-state"
+                              rendered="#{dashboardBean.operationsIndisponibles}">
+                    Les opérations ne sont pas disponibles pour le moment.
+                </h:panelGroup>
+            </section>
+        </ui:define>
+    </ui:composition>
+</html>
+
+

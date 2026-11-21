@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateStocksTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    <h:outputLabel value="#{bundle.CreateStocksLabel_quantite}" for="quantite" />
+                    <h:inputText id="quantite" value="#{stocksController.selected.quantite}" title="#{bundle.CreateStocksTitle_quantite}" required="true" requiredMessage="#{bundle.CreateStocksRequiredMessage_quantite}"/>
+                    <h:outputLabel value="#{bundle.CreateStocksLabel_articleId}" for="articleId" />
+                    <h:selectOneMenu id="articleId" value="#{stocksController.selected.articleId}" title="#{bundle.CreateStocksTitle_articleId}"  converter="#{articlesController.converter}">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{stocksController.create}" value="#{bundle.CreateStocksSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{stocksController.prepareList}" value="#{bundle.CreateStocksShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

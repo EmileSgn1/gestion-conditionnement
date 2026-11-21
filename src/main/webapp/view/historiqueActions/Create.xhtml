@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateHistoriqueActionsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    <h:outputLabel value="#{bundle.CreateHistoriqueActionsLabel_utilisateurId}" for="utilisateurId" />
+                    <h:selectOneMenu id="utilisateurId" value="#{historiqueActionsController.selected.utilisateurId}" converter="#{historiqueActionsController.converter}"><f:selectItems value="#{utilisateursController.itemsAvailableSelectOneById}" /></h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateHistoriqueActionsLabel_action}" for="action" />
+                    <h:inputText id="action" value="#{historiqueActionsController.selected.action}" title="#{bundle.CreateHistoriqueActionsTitle_action}" required="true" requiredMessage="#{bundle.CreateHistoriqueActionsRequiredMessage_action}"/>
+                    <h:outputLabel value="#{bundle.CreateHistoriqueActionsLabel_details}" for="details" />
+                    <h:inputText id="details" value="#{historiqueActionsController.selected.details}" title="#{bundle.CreateHistoriqueActionsTitle_details}" />
+                    <h:outputLabel value="#{bundle.CreateHistoriqueActionsLabel_adresseIp}" for="adresseIp" />
+                    <h:inputText id="adresseIp" value="#{historiqueActionsController.selected.adresseIp}" title="#{bundle.CreateHistoriqueActionsTitle_adresseIp}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{historiqueActionsController.create}" value="#{bundle.CreateHistoriqueActionsSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{historiqueActionsController.prepareList}" value="#{bundle.CreateHistoriqueActionsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

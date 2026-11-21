@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAlertesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    <h:outputLabel value="#{bundle.CreateAlertesLabel_typeAlerte}" for="typeAlerte" />
+                    <h:inputText id="typeAlerte" value="#{alertesController.selected.typeAlerte}" title="#{bundle.CreateAlertesTitle_typeAlerte}" required="true" requiredMessage="#{bundle.CreateAlertesRequiredMessage_typeAlerte}"/>
+                    <h:outputLabel value="#{bundle.CreateAlertesLabel_message}" for="message" />
+                    <h:inputText id="message" value="#{alertesController.selected.message}" title="#{bundle.CreateAlertesTitle_message}" required="true" requiredMessage="#{bundle.CreateAlertesRequiredMessage_message}"/>
+                    <h:outputLabel value="#{bundle.CreateAlertesLabel_niveau}" for="niveau" />
+                    <h:inputText id="niveau" value="#{alertesController.selected.niveau}" title="#{bundle.CreateAlertesTitle_niveau}" required="true" requiredMessage="#{bundle.CreateAlertesRequiredMessage_niveau}"/>
+                    <h:outputLabel value="#{bundle.CreateAlertesLabel_lu}" for="lu" />
+                    <h:selectBooleanCheckbox id="lu" value="#{alertesController.selected.lu}"/>
+                    <h:outputLabel value="#{bundle.CreateAlertesLabel_actif}" for="actif" />
+                    <h:selectBooleanCheckbox id="actif" value="#{alertesController.selected.actif}"/>
+                    <h:outputLabel value="#{bundle.CreateAlertesLabel_sourceKey}" for="sourceKey" />
+                    <h:inputText id="sourceKey" value="#{alertesController.selected.sourceKey}" title="#{bundle.CreateAlertesTitle_sourceKey}" />
+                    <h:outputLabel value="#{bundle.CreateAlertesLabel_retiree}" for="retiree" />
+                    <h:selectBooleanCheckbox id="retiree" value="#{alertesController.selected.retiree}"/>
+                    <h:outputLabel value="#{bundle.CreateAlertesLabel_articleId}" for="articleId" />
+                    <h:selectOneMenu id="articleId" value="#{alertesController.selected.articleId}" title="#{bundle.CreateAlertesTitle_articleId}"  converter="#{articlesController.converter}">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{alertesController.create}" value="#{bundle.CreateAlertesSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{alertesController.prepareList}" value="#{bundle.CreateAlertesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

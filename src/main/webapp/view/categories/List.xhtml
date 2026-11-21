@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCategoriesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{categoriesController.prepareCreate}" value="#{bundle.ListCategoriesCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{categoriesController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListCategoriesEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{categoriesController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{categoriesController.pagination.pageFirstItem + 1} à #{categoriesController.pagination.pageLastItem + 1} sur #{categoriesController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{categoriesController.previous}" value="#{bundle.Previous} #{categoriesController.pagination.pageSize}" rendered="#{categoriesController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{categoriesController.next}" value="#{bundle.Next} #{categoriesController.pagination.pageSize}" rendered="#{categoriesController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{categoriesController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCategoriesTitle_nom}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.nom ? item.nom : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCategoriesTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.description ? item.description : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCategoriesTitle_actif}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.actif ? 'Oui' : 'Non'}" styleClass="#{item.actif ? 'status-pill status-positive' : 'status-pill status-neutral'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{categoriesController.prepareView}" value="#{bundle.ListCategoriesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{categoriesController.prepareEdit}" value="#{bundle.ListCategoriesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{categoriesController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListCategoriesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

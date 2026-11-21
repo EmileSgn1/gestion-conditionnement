@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Gestion des stocks — CondiGestion</ui:define>
+        <ui:define name="breadcrumb">Gestion des stocks</ui:define>
+
+        <ui:define name="body">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Gestion des stocks</h1>
+                    <p class="dashboard-lead">
+                        Consultez le catalogue, les niveaux de stock, les mouvements et les alertes.
+                    </p>
+                </div>
+            </div>
+
+            <section class="dashboard-section" aria-labelledby="catalogue-heading">
+                <div class="dashboard-card-header">
+                    <div>
+                        <div class="kpi-label">Référentiel</div>
+                        <h2 id="catalogue-heading">Catalogue et conditionnements</h2>
+                    </div>
+                </div>
+                <div class="dashboard-action-grid">
+                    <h:link outcome="/view/articles/List" value="Articles" styleClass="dashboard-action" />
+                    <h:link outcome="/view/categories/List" value="Catégories" styleClass="dashboard-action" />
+                    <h:link outcome="/view/conditionnements/List" value="Conditionnements" styleClass="dashboard-action" />
+                    <h:link outcome="/view/conditionnementsCatalogue/List" value="Catalogue des conditionnements" styleClass="dashboard-action" />
+                    <h:link outcome="/view/compositionsConditionnements/List" value="Compositions" styleClass="dashboard-action" />
+                </div>
+            </section>
+
+            <section class="dashboard-section" aria-labelledby="stocks-heading">
+                <div class="dashboard-card-header">
+                    <div>
+                        <div class="kpi-label">Suivi opérationnel</div>
+                        <h2 id="stocks-heading">Stocks et alertes</h2>
+                    </div>
+                </div>
+                <div class="dashboard-action-grid">
+                    <h:link outcome="/view/stocks/List" value="Stocks" styleClass="dashboard-action" />
+                    <h:link outcome="/view/mouvementsStock/List" value="Mouvements de stock" styleClass="dashboard-action" />
+                    <h:link outcome="/view/ecartsStock/List" value="Écarts de stock" styleClass="dashboard-action" />
+                    <h:link outcome="/view/alertes/List" value="Alertes" styleClass="dashboard-action" />
+                </div>
+            </section>
+        </ui:define>
+    </ui:composition>
+</html>
+
+

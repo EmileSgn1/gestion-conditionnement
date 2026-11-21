@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAlertesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{alertesController.prepareCreate}" value="#{bundle.ListAlertesCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{alertesController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListAlertesEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{alertesController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{alertesController.pagination.pageFirstItem + 1} à #{alertesController.pagination.pageLastItem + 1} sur #{alertesController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{alertesController.previous}" value="#{bundle.Previous} #{alertesController.pagination.pageSize}" rendered="#{alertesController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{alertesController.next}" value="#{bundle.Next} #{alertesController.pagination.pageSize}" rendered="#{alertesController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{alertesController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlertesTitle_typeAlerte}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.typeAlerte ? item.typeAlerte : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlertesTitle_message}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.message ? item.message : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlertesTitle_dateAlerte}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateAlerte}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlertesTitle_niveau}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.niveau ? item.niveau : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlertesTitle_lu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lu ? 'Oui' : 'Non'}" styleClass="#{item.lu ? 'status-pill status-neutral' : 'status-pill status-warning'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlertesTitle_actif}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.actif ? 'Oui' : 'Non'}" styleClass="#{item.actif ? 'status-pill status-positive' : 'status-pill status-neutral'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlertesTitle_articleId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.articleId ? item.articleId.nom : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{alertesController.prepareView}" value="#{bundle.ListAlertesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{alertesController.prepareEdit}" value="#{bundle.ListAlertesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{alertesController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListAlertesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

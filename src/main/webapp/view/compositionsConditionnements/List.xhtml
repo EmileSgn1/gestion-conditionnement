@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCompositionsConditionnementsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{compositionsConditionnementsController.prepareCreate}" value="#{bundle.ListCompositionsConditionnementsCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{compositionsConditionnementsController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListCompositionsConditionnementsEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{compositionsConditionnementsController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{compositionsConditionnementsController.pagination.pageFirstItem + 1} à #{compositionsConditionnementsController.pagination.pageLastItem + 1} sur #{compositionsConditionnementsController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{compositionsConditionnementsController.previous}" value="#{bundle.Previous} #{compositionsConditionnementsController.pagination.pageSize}" rendered="#{compositionsConditionnementsController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{compositionsConditionnementsController.next}" value="#{bundle.Next} #{compositionsConditionnementsController.pagination.pageSize}" rendered="#{compositionsConditionnementsController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{compositionsConditionnementsController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCompositionsConditionnementsTitle_articleId}"/>
+                            </f:facet>
+                            <h:outputText value="#{articlesController.libellePourId(item.articleId)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCompositionsConditionnementsTitle_conditionnementDepartId}"/>
+                            </f:facet>
+                            <h:outputText value="#{conditionnementsController.libellePourId(item.conditionnementDepartId)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCompositionsConditionnementsTitle_conditionnementObtenuId}"/>
+                            </f:facet>
+                            <h:outputText value="#{conditionnementsController.libellePourId(item.conditionnementObtenuId)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCompositionsConditionnementsTitle_quantiteTheorique}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.quantiteTheorique ? item.quantiteTheorique : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCompositionsConditionnementsTitle_actif}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.actif ? 'Oui' : 'Non'}" styleClass="#{item.actif ? 'status-pill status-positive' : 'status-pill status-neutral'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{compositionsConditionnementsController.prepareView}" value="#{bundle.ListCompositionsConditionnementsViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{compositionsConditionnementsController.prepareEdit}" value="#{bundle.ListCompositionsConditionnementsEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{compositionsConditionnementsController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListCompositionsConditionnementsDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

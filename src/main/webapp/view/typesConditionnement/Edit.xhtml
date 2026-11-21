@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTypesConditionnementTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditTypesConditionnementLabel_libelle}" for="libelle" />
+                    <h:inputText id="libelle" value="#{typesConditionnementController.selected.libelle}" title="#{bundle.EditTypesConditionnementTitle_libelle}" required="true" requiredMessage="#{bundle.EditTypesConditionnementRequiredMessage_libelle}"/>
+                    <h:outputLabel value="#{bundle.EditTypesConditionnementLabel_coefficientConversion}" for="coefficientConversion" />
+                    <h:inputText id="coefficientConversion" value="#{typesConditionnementController.selected.coefficientConversion}" title="#{bundle.EditTypesConditionnementTitle_coefficientConversion}" required="true" requiredMessage="#{bundle.EditTypesConditionnementRequiredMessage_coefficientConversion}"/>
+                    <h:outputLabel value="#{bundle.EditTypesConditionnementLabel_nom}" for="nom" />
+                    <h:inputText id="nom" value="#{typesConditionnementController.selected.nom}" title="#{bundle.EditTypesConditionnementTitle_nom}" required="true" requiredMessage="#{bundle.EditTypesConditionnementRequiredMessage_nom}"/>
+                    <h:outputLabel value="#{bundle.EditTypesConditionnementLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{typesConditionnementController.selected.description}" title="#{bundle.EditTypesConditionnementTitle_description}" />
+                    <h:outputLabel value="#{bundle.EditTypesConditionnementLabel_actif}" for="actif" />
+                    <h:selectBooleanCheckbox id="actif" value="#{typesConditionnementController.selected.actif}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{typesConditionnementController.update}" value="#{bundle.EditTypesConditionnementSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTypesConditionnementViewLink}"/>
+                <br />
+                <h:commandLink action="#{typesConditionnementController.prepareList}" value="#{bundle.EditTypesConditionnementShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

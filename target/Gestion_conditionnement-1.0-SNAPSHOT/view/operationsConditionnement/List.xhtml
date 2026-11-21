@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Opérations de conditionnement</ui:define>
+        <ui:define name="breadcrumb">Opérations de conditionnement</ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form operations-list">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Opérations de conditionnement</h1>
+                        <p class="dashboard-lead">Consultez les opérations saisies et enregistrez les productions réalisées.</p>
+                    </div>
+                    <h:commandLink action="#{operationsConditionnementController.prepareCreate}" value="Créer une opération" styleClass="btn-primary"/>
+                </div>
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                <div class="kpi-grid">
+                    <div class="kpi-card highlight"><div class="kpi-label">Opérations sur cette page</div><div class="kpi-value">#{operationsConditionnementController.items.rowCount}</div></div>
+                    <div class="kpi-card"><div class="kpi-label">Total des opérations</div><div class="kpi-value">#{operationsConditionnementController.pagination.itemsCount}</div></div>
+                </div>
+                <div class="data-card">
+                    <h2>Opérations enregistrées</h2>
+                    <h:panelGroup layout="block" rendered="#{operationsConditionnementController.items.rowCount == 0}">
+                        <p class="empty-state">Aucune opération enregistrée.</p>
+                        <h:commandLink action="#{operationsConditionnementController.prepareCreate}" value="Créer une opération" styleClass="btn-primary"/>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" rendered="#{operationsConditionnementController.items.rowCount > 0}">
+                        <div class="pagination-bar">
+                            <span>Affichage de #{operationsConditionnementController.pagination.pageFirstItem + 1} à #{operationsConditionnementController.pagination.pageLastItem + 1} sur #{operationsConditionnementController.pagination.itemsCount}</span>
+                            <div class="dashboard-actions">
+                                <h:commandLink action="#{operationsConditionnementController.previous}" value="Précédent" rendered="#{operationsConditionnementController.pagination.hasPreviousPage}" styleClass="btn-secondary"/>
+                                <h:commandLink action="#{operationsConditionnementController.next}" value="Suivant" rendered="#{operationsConditionnementController.pagination.hasNextPage}" styleClass="btn-secondary"/>
+                            </div>
+                        </div>
+                        <h:dataTable value="#{operationsConditionnementController.items}" var="item" styleClass="modern-table">
+                            <h:column><f:facet name="header">Référence</f:facet><h:outputText value="#{not empty item.reference ? item.reference : 'Opération '.concat(item.id)}"/></h:column>
+                            <h:column><f:facet name="header">Date</f:facet><h:outputText value="#{item.dateOperation}"><f:convertDateTime pattern="dd/MM/yyyy HH:mm"/></h:outputText></h:column>
+                            <h:column><f:facet name="header">Article source</f:facet><h:outputText value="#{not empty item.articleSourceId ? item.articleSourceId.nom : '—'}"/></h:column>
+                            <h:column><f:facet name="header">Article produit</f:facet><h:outputText value="#{not empty item.articleProduitId ? item.articleProduitId.nom : '—'}"/></h:column>
+                            <h:column><f:facet name="header">Quantité produite</f:facet><h:outputText value="#{not empty item.quantiteProduite ? item.quantiteProduite : '—'}" /></h:column>
+                            <h:column>
+                                <f:facet name="header">Actions</f:facet>
+                                <div class="dashboard-actions">
+                                    <h:commandLink action="#{operationsConditionnementController.prepareView}" value="Consulter" styleClass="btn-secondary"/>
+                                    <h:commandLink action="#{operationsConditionnementController.prepareEdit}" value="Modifier" styleClass="btn-secondary"/>
+                                    <h:commandLink action="#{operationsConditionnementController.destroy}" value="Supprimer" onclick="return confirm('Supprimer cette opération ?');" styleClass="btn-secondary"/>
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+
+
+
+
+
+
+

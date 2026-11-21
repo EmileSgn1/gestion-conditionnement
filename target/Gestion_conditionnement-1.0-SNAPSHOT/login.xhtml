@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core">
+<h:head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Connexion | CondiGestion</title><h:outputStylesheet name="css/condigestion.css" /></h:head>
+<h:body styleClass="login-page"><main class="login-card"><div class="login-brand"><div><strong>CondiGestion</strong><div class="brand-subtitle">Gestion &amp; conditionnement</div></div></div><h1>Connexion</h1><p class="login-intro">Accédez à votre espace de travail sécurisé.</p>
+<h:form styleClass="login-form"><h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" globalOnly="true" /><h:outputLabel for="email" value="Adresse e-mail" /><h:inputText id="email" value="#{loginBean.email}" required="true" requiredMessage="Saisissez votre adresse e-mail." autocomplete="username" /><h:outputLabel for="password" value="Mot de passe" /><h:inputSecret id="password" value="#{loginBean.password}" required="true" requiredMessage="Saisissez votre mot de passe." autocomplete="current-password" /><h:commandButton value="Se connecter" action="#{loginBean.seConnecter}" styleClass="btn-primary" /></h:form></main></h:body></html>
+
+
+
+

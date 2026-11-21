@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewParametresApplicationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewParametresApplicationLabel_cle}"/>
+                    <h:outputText value="#{not empty parametresApplicationController.selected.cle ? parametresApplicationController.selected.cle : '—'}" title="#{bundle.ViewParametresApplicationTitle_cle}" />
+                    <h:outputText value="#{bundle.ViewParametresApplicationLabel_valeur}"/>
+                    <h:outputText value="#{not empty parametresApplicationController.selected.valeur ? parametresApplicationController.selected.valeur : '—'}" title="#{bundle.ViewParametresApplicationTitle_valeur}" />
+                    <h:outputText value="#{bundle.ViewParametresApplicationLabel_description}"/>
+                    <h:outputText value="#{not empty parametresApplicationController.selected.description ? parametresApplicationController.selected.description : '—'}" title="#{bundle.ViewParametresApplicationTitle_description}" />
+                    <h:outputText value="#{bundle.ViewParametresApplicationLabel_dateModification}"/>
+                    <h:outputText value="#{parametresApplicationController.selected.dateModification}" title="#{bundle.ViewParametresApplicationTitle_dateModification}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{parametresApplicationController.destroyAndView}" value="#{bundle.ViewParametresApplicationDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewParametresApplicationEditLink}"/>
+                <br />
+                <h:commandLink action="#{parametresApplicationController.prepareCreate}" value="#{bundle.ViewParametresApplicationCreateLink}" />
+                <br />
+                <h:commandLink action="#{parametresApplicationController.prepareList}" value="#{bundle.ViewParametresApplicationShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

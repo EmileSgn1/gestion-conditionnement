@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditOperationsConditionnementTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditOperationsConditionnementLabel_reference}" for="reference" />
+                    <h:inputText id="reference" value="#{operationsConditionnementController.selected.reference}" title="#{bundle.EditOperationsConditionnementTitle_reference}" required="true" requiredMessage="#{bundle.EditOperationsConditionnementRequiredMessage_reference}"/>
+                    <h:outputLabel value="#{bundle.EditOperationsConditionnementLabel_quantiteConsommee}" for="quantiteConsommee" />
+                    <h:inputText id="quantiteConsommee" value="#{operationsConditionnementController.selected.quantiteConsommee}" title="#{bundle.EditOperationsConditionnementTitle_quantiteConsommee}" required="true" requiredMessage="#{bundle.EditOperationsConditionnementRequiredMessage_quantiteConsommee}"/>
+                    <h:outputLabel value="#{bundle.EditOperationsConditionnementLabel_quantiteProduite}" for="quantiteProduite" />
+                    <h:inputText id="quantiteProduite" value="#{operationsConditionnementController.selected.quantiteProduite}" title="#{bundle.EditOperationsConditionnementTitle_quantiteProduite}" required="true" requiredMessage="#{bundle.EditOperationsConditionnementRequiredMessage_quantiteProduite}"/>
+                    <h:outputLabel value="#{bundle.EditOperationsConditionnementLabel_commentaire}" for="commentaire" />
+                    <h:inputText id="commentaire" value="#{operationsConditionnementController.selected.commentaire}" title="#{bundle.EditOperationsConditionnementTitle_commentaire}" />
+                    <h:outputLabel value="#{bundle.EditOperationsConditionnementLabel_quantiteConsomme}" for="quantiteConsomme" />
+                    <h:inputText id="quantiteConsomme" value="#{operationsConditionnementController.selected.quantiteConsomme}" title="#{bundle.EditOperationsConditionnementTitle_quantiteConsomme}" required="true" requiredMessage="#{bundle.EditOperationsConditionnementRequiredMessage_quantiteConsomme}"/>
+                    <h:outputLabel value="#{bundle.EditOperationsConditionnementLabel_nombreConditionnements}" for="nombreConditionnements" />
+                    <h:inputText id="nombreConditionnements" value="#{operationsConditionnementController.selected.nombreConditionnements}" title="#{bundle.EditOperationsConditionnementTitle_nombreConditionnements}" required="true" requiredMessage="#{bundle.EditOperationsConditionnementRequiredMessage_nombreConditionnements}"/>
+                    <h:outputLabel value="#{bundle.EditOperationsConditionnementLabel_articleProduitId}" for="articleProduitId" />
+                    <h:selectOneMenu id="articleProduitId" value="#{operationsConditionnementController.selected.articleProduitId}" title="#{bundle.EditOperationsConditionnementTitle_articleProduitId}"  converter="#{articlesController.converter}">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditOperationsConditionnementLabel_articleSourceId}" for="articleSourceId" />
+                    <h:selectOneMenu id="articleSourceId" value="#{operationsConditionnementController.selected.articleSourceId}" title="#{bundle.EditOperationsConditionnementTitle_articleSourceId}"  converter="#{articlesController.converter}">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditOperationsConditionnementLabel_conditionnementId}" for="conditionnementId" />
+                    <h:selectOneMenu id="conditionnementId" value="#{operationsConditionnementController.selected.conditionnementId}" title="#{bundle.EditOperationsConditionnementTitle_conditionnementId}"  converter="#{conditionnementsController.converter}">
+                        <f:selectItems value="#{conditionnementsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditOperationsConditionnementLabel_utilisateurId}" for="utilisateurId" />
+                    <h:selectOneMenu id="utilisateurId" value="#{operationsConditionnementController.selected.utilisateurId}" title="#{bundle.EditOperationsConditionnementTitle_utilisateurId}"  converter="#{utilisateursController.converter}">
+                        <f:selectItems value="#{utilisateursController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{operationsConditionnementController.update}" value="#{bundle.EditOperationsConditionnementSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditOperationsConditionnementViewLink}"/>
+                <br />
+                <h:commandLink action="#{operationsConditionnementController.prepareList}" value="#{bundle.EditOperationsConditionnementShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

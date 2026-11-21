@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCompositionsConditionnementsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    <h:outputLabel value="#{bundle.CreateCompositionsConditionnementsLabel_articleId}" for="articleId" />
+                    <h:selectOneMenu id="articleId" value="#{compositionsConditionnementsController.selected.articleId}" converter="#{compositionsConditionnementsController.converter}" required="true">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOneById}" />
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCompositionsConditionnementsLabel_conditionnementDepartId}" for="conditionnementDepartId" />
+                    <h:selectOneMenu id="conditionnementDepartId" value="#{compositionsConditionnementsController.selected.conditionnementDepartId}" converter="#{compositionsConditionnementsController.converter}" required="true">
+                        <f:selectItems value="#{conditionnementsController.itemsAvailableSelectOneById}" />
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCompositionsConditionnementsLabel_conditionnementObtenuId}" for="conditionnementObtenuId" />
+                    <h:selectOneMenu id="conditionnementObtenuId" value="#{compositionsConditionnementsController.selected.conditionnementObtenuId}" converter="#{compositionsConditionnementsController.converter}" required="true">
+                        <f:selectItems value="#{conditionnementsController.itemsAvailableSelectOneById}" />
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCompositionsConditionnementsLabel_quantiteTheorique}" for="quantiteTheorique" />
+                    <h:inputText id="quantiteTheorique" value="#{compositionsConditionnementsController.selected.quantiteTheorique}" title="#{bundle.CreateCompositionsConditionnementsTitle_quantiteTheorique}" required="true" requiredMessage="#{bundle.CreateCompositionsConditionnementsRequiredMessage_quantiteTheorique}"/>
+                    <h:outputLabel value="#{bundle.CreateCompositionsConditionnementsLabel_actif}" for="actif" />
+                    <h:selectBooleanCheckbox id="actif" value="#{compositionsConditionnementsController.selected.actif}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{compositionsConditionnementsController.create}" value="#{bundle.CreateCompositionsConditionnementsSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{compositionsConditionnementsController.prepareList}" value="#{bundle.CreateCompositionsConditionnementsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

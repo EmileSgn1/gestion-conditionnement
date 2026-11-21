@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOperationsConditionnementTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_reference}"/>
+                    <h:outputText value="#{not empty operationsConditionnementController.selected.reference ? operationsConditionnementController.selected.reference : '—'}" title="#{bundle.ViewOperationsConditionnementTitle_reference}" />
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_quantiteConsommee}"/>
+                    <h:outputText value="#{not empty operationsConditionnementController.selected.quantiteConsommee ? operationsConditionnementController.selected.quantiteConsommee : '—'}" title="#{bundle.ViewOperationsConditionnementTitle_quantiteConsommee}" />
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_quantiteProduite}"/>
+                    <h:outputText value="#{not empty operationsConditionnementController.selected.quantiteProduite ? operationsConditionnementController.selected.quantiteProduite : '—'}" title="#{bundle.ViewOperationsConditionnementTitle_quantiteProduite}" />
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_dateOperation}"/>
+                    <h:outputText value="#{operationsConditionnementController.selected.dateOperation}" title="#{bundle.ViewOperationsConditionnementTitle_dateOperation}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_commentaire}"/>
+                    <h:outputText value="#{not empty operationsConditionnementController.selected.commentaire ? operationsConditionnementController.selected.commentaire : '—'}" title="#{bundle.ViewOperationsConditionnementTitle_commentaire}" />
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_quantiteConsomme}"/>
+                    <h:outputText value="#{not empty operationsConditionnementController.selected.quantiteConsomme ? operationsConditionnementController.selected.quantiteConsomme : '—'}" title="#{bundle.ViewOperationsConditionnementTitle_quantiteConsomme}" />
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_nombreConditionnements}"/>
+                    <h:outputText value="#{not empty operationsConditionnementController.selected.nombreConditionnements ? operationsConditionnementController.selected.nombreConditionnements : '—'}" title="#{bundle.ViewOperationsConditionnementTitle_nombreConditionnements}" />
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_articleProduitId}"/>
+                    <h:outputText value="#{not empty operationsConditionnementController.selected.articleProduitId ? operationsConditionnementController.selected.articleProduitId.nom : '—'}" title="#{bundle.ViewOperationsConditionnementTitle_articleProduitId}"/>
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_articleSourceId}"/>
+                    <h:outputText value="#{not empty operationsConditionnementController.selected.articleSourceId ? operationsConditionnementController.selected.articleSourceId.nom : '—'}" title="#{bundle.ViewOperationsConditionnementTitle_articleSourceId}"/>
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_conditionnementId}"/>
+                    <h:outputText value="#{not empty operationsConditionnementController.selected.conditionnementId and not empty operationsConditionnementController.selected.conditionnementId.typeConditionnementId ? operationsConditionnementController.selected.conditionnementId.typeConditionnementId.libelle : '—'}" title="#{bundle.ViewOperationsConditionnementTitle_conditionnementId}"/>
+                    <h:outputText value="#{bundle.ViewOperationsConditionnementLabel_utilisateurId}"/>
+                    <h:outputText value="#{not empty operationsConditionnementController.selected.utilisateurId ? operationsConditionnementController.selected.utilisateurId.nom : '—'}" title="#{bundle.ViewOperationsConditionnementTitle_utilisateurId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{operationsConditionnementController.destroyAndView}" value="#{bundle.ViewOperationsConditionnementDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewOperationsConditionnementEditLink}"/>
+                <br />
+                <h:commandLink action="#{operationsConditionnementController.prepareCreate}" value="#{bundle.ViewOperationsConditionnementCreateLink}" />
+                <br />
+                <h:commandLink action="#{operationsConditionnementController.prepareList}" value="#{bundle.ViewOperationsConditionnementShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

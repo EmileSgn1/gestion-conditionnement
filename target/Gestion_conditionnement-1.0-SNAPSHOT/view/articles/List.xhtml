@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListArticlesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{articlesController.prepareCreate}" value="#{bundle.ListArticlesCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{articlesController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListArticlesEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{articlesController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{articlesController.pagination.pageFirstItem + 1} à #{articlesController.pagination.pageLastItem + 1} sur #{articlesController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{articlesController.previous}" value="#{bundle.Previous} #{articlesController.pagination.pageSize}" rendered="#{articlesController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{articlesController.next}" value="#{bundle.Next} #{articlesController.pagination.pageSize}" rendered="#{articlesController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{articlesController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table article-table">
+                        
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticlesTitle_reference}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.reference ? item.reference : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticlesTitle_nom}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.nom ? item.nom : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticlesTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.description ? item.description : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticlesTitle_actif}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.actif ? 'Oui' : 'Non'}" styleClass="#{item.actif ? 'status-pill status-positive' : 'status-pill status-neutral'}"/>
+                        </h:column>
+                        
+                        
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticlesTitle_prix}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.prix ? item.prix : '—'}" />
+                        </h:column>
+                        
+                        
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticlesTitle_categorieId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.categorieId ? item.categorieId.nom : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticlesTitle_uniteId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.uniteId ? item.uniteId.sigle : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="#{bundle.ListArticlesTitle_stockMin}"/></f:facet>
+                            <h:outputText value="#{not empty item.stockMin ? item.stockMin : '—'}" />
+                        </h:column>
+<h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{articlesController.prepareView}" value="#{bundle.ListArticlesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{articlesController.prepareEdit}" value="#{bundle.ListArticlesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{articlesController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListArticlesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+

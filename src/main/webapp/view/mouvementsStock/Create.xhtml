@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateMouvementsStockTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    <h:outputLabel value="#{bundle.CreateMouvementsStockLabel_typeMouvement}" for="typeMouvement" />
+                    <h:inputText id="typeMouvement" value="#{mouvementsStockController.selected.typeMouvement}" title="#{bundle.CreateMouvementsStockTitle_typeMouvement}" required="true" requiredMessage="#{bundle.CreateMouvementsStockRequiredMessage_typeMouvement}"/>
+                    <h:outputLabel value="#{bundle.CreateMouvementsStockLabel_quantite}" for="quantite" />
+                    <h:inputText id="quantite" value="#{mouvementsStockController.selected.quantite}" title="#{bundle.CreateMouvementsStockTitle_quantite}" required="true" requiredMessage="#{bundle.CreateMouvementsStockRequiredMessage_quantite}"/>
+                    <h:outputLabel value="#{bundle.CreateMouvementsStockLabel_motif}" for="motif" />
+                    <h:inputText id="motif" value="#{mouvementsStockController.selected.motif}" title="#{bundle.CreateMouvementsStockTitle_motif}" />
+                    <h:outputLabel value="#{bundle.CreateMouvementsStockLabel_reference}" for="reference" />
+                    <h:inputText id="reference" value="#{mouvementsStockController.selected.reference}" title="#{bundle.CreateMouvementsStockTitle_reference}" />
+                    <h:outputLabel value="#{bundle.CreateMouvementsStockLabel_articleId}" for="articleId" />
+                    <h:selectOneMenu id="articleId" value="#{mouvementsStockController.selected.articleId}" title="#{bundle.CreateMouvementsStockTitle_articleId}"  converter="#{articlesController.converter}">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateMouvementsStockLabel_operationId}" for="operationId" />
+                    <h:selectOneMenu id="operationId" value="#{mouvementsStockController.selected.operationId}" title="#{bundle.CreateMouvementsStockTitle_operationId}"  converter="#{operationsConditionnementController.converter}">
+                        <f:selectItems value="#{operationsConditionnementController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateMouvementsStockLabel_utilisateurId}" for="utilisateurId" />
+                    <h:selectOneMenu id="utilisateurId" value="#{mouvementsStockController.selected.utilisateurId}" title="#{bundle.CreateMouvementsStockTitle_utilisateurId}"  converter="#{utilisateursController.converter}">
+                        <f:selectItems value="#{utilisateursController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{mouvementsStockController.create}" value="#{bundle.CreateMouvementsStockSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{mouvementsStockController.prepareList}" value="#{bundle.CreateMouvementsStockShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

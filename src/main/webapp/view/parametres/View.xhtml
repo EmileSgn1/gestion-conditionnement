@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html">
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">Détail du réglage</ui:define>
+        <ui:define name="breadcrumb">Paramètres / Détail</ui:define>
+        <ui:define name="body">
+            <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Clé"/><h:outputText value="#{not empty parametresController.selected.cle ? parametresController.selected.cle : '—'}" />
+                    <h:outputText value="Valeur"/><h:outputText value="#{not empty parametresController.selected.valeur ? parametresController.selected.valeur : '—'}"/>
+                    <h:outputText value="Description"/><h:outputText value="#{not empty parametresController.selected.description ? parametresController.selected.description : '—'}"/>
+                </h:panelGrid>
+                <h:link outcome="Edit" value="Modifier le réglage" styleClass="btn-primary"/>
+                <h:link outcome="List" value="Retour aux paramètres" styleClass="btn-secondary"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

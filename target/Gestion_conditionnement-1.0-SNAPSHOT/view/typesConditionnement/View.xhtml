@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTypesConditionnementTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="#{bundle.ViewTypesConditionnementLabel_libelle}"/>
+                    <h:outputText value="#{not empty typesConditionnementController.selected.libelle ? typesConditionnementController.selected.libelle : '—'}" title="#{bundle.ViewTypesConditionnementTitle_libelle}" />
+                    <h:outputText value="#{bundle.ViewTypesConditionnementLabel_coefficientConversion}"/>
+                    <h:outputText value="#{not empty typesConditionnementController.selected.coefficientConversion ? typesConditionnementController.selected.coefficientConversion : '—'}" title="#{bundle.ViewTypesConditionnementTitle_coefficientConversion}" />
+                    <h:outputText value="#{bundle.ViewTypesConditionnementLabel_nom}"/>
+                    <h:outputText value="#{not empty typesConditionnementController.selected.nom ? typesConditionnementController.selected.nom : '—'}" title="#{bundle.ViewTypesConditionnementTitle_nom}" />
+                    <h:outputText value="#{bundle.ViewTypesConditionnementLabel_description}"/>
+                    <h:outputText value="#{not empty typesConditionnementController.selected.description ? typesConditionnementController.selected.description : '—'}" title="#{bundle.ViewTypesConditionnementTitle_description}" />
+                    <h:outputText value="#{bundle.ViewTypesConditionnementLabel_actif}"/>
+                    <h:outputText value="#{typesConditionnementController.selected.actif ? 'Oui' : 'Non'}" title="#{bundle.ViewTypesConditionnementTitle_actif}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{typesConditionnementController.destroyAndView}" value="#{bundle.ViewTypesConditionnementDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTypesConditionnementEditLink}"/>
+                <br />
+                <h:commandLink action="#{typesConditionnementController.prepareCreate}" value="#{bundle.ViewTypesConditionnementCreateLink}" />
+                <br />
+                <h:commandLink action="#{typesConditionnementController.prepareList}" value="#{bundle.ViewTypesConditionnementShowAllLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+

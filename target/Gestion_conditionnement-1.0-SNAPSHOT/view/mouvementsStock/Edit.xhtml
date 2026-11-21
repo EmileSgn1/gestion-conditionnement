@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMouvementsStockTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditMouvementsStockLabel_typeMouvement}" for="typeMouvement" />
+                    <h:inputText id="typeMouvement" value="#{mouvementsStockController.selected.typeMouvement}" title="#{bundle.EditMouvementsStockTitle_typeMouvement}" required="true" requiredMessage="#{bundle.EditMouvementsStockRequiredMessage_typeMouvement}"/>
+                    <h:outputLabel value="#{bundle.EditMouvementsStockLabel_quantite}" for="quantite" />
+                    <h:inputText id="quantite" value="#{mouvementsStockController.selected.quantite}" title="#{bundle.EditMouvementsStockTitle_quantite}" required="true" requiredMessage="#{bundle.EditMouvementsStockRequiredMessage_quantite}"/>
+                    <h:outputLabel value="#{bundle.EditMouvementsStockLabel_motif}" for="motif" />
+                    <h:inputText id="motif" value="#{mouvementsStockController.selected.motif}" title="#{bundle.EditMouvementsStockTitle_motif}" />
+                    <h:outputLabel value="#{bundle.EditMouvementsStockLabel_reference}" for="reference" />
+                    <h:inputText id="reference" value="#{mouvementsStockController.selected.reference}" title="#{bundle.EditMouvementsStockTitle_reference}" />
+                    <h:outputLabel value="#{bundle.EditMouvementsStockLabel_articleId}" for="articleId" />
+                    <h:selectOneMenu id="articleId" value="#{mouvementsStockController.selected.articleId}" title="#{bundle.EditMouvementsStockTitle_articleId}"  converter="#{articlesController.converter}">
+                        <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMouvementsStockLabel_operationId}" for="operationId" />
+                    <h:selectOneMenu id="operationId" value="#{mouvementsStockController.selected.operationId}" title="#{bundle.EditMouvementsStockTitle_operationId}"  converter="#{operationsConditionnementController.converter}">
+                        <f:selectItems value="#{operationsConditionnementController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMouvementsStockLabel_utilisateurId}" for="utilisateurId" />
+                    <h:selectOneMenu id="utilisateurId" value="#{mouvementsStockController.selected.utilisateurId}" title="#{bundle.EditMouvementsStockTitle_utilisateurId}"  converter="#{utilisateursController.converter}">
+                        <f:selectItems value="#{utilisateursController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{mouvementsStockController.update}" value="#{bundle.EditMouvementsStockSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditMouvementsStockViewLink}"/>
+                <br />
+                <h:commandLink action="#{mouvementsStockController.prepareList}" value="#{bundle.EditMouvementsStockShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

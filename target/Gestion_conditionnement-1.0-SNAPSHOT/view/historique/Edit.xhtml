@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditHistoriqueTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditHistoriqueLabel_action}" for="action" />
+                    <h:inputText id="action" value="#{historiqueController.selected.action}" title="#{bundle.EditHistoriqueTitle_action}" required="true" requiredMessage="#{bundle.EditHistoriqueRequiredMessage_action}"/>
+                    <h:outputLabel value="#{bundle.EditHistoriqueLabel_details}" for="details" />
+                    <h:inputText id="details" value="#{historiqueController.selected.details}" title="#{bundle.EditHistoriqueTitle_details}" />
+                    <h:outputLabel value="#{bundle.EditHistoriqueLabel_entite}" for="entite" />
+                    <h:inputText id="entite" value="#{historiqueController.selected.entite}" title="#{bundle.EditHistoriqueTitle_entite}" />
+                    <h:outputLabel value="#{bundle.EditHistoriqueLabel_entiteId}" for="entiteId" />
+                    <h:inputText id="entiteId" value="#{historiqueController.selected.entiteId}" title="#{bundle.EditHistoriqueTitle_entiteId}" />
+                    <h:outputLabel value="#{bundle.EditHistoriqueLabel_utilisateurId}" for="utilisateurId" />
+                    <h:selectOneMenu id="utilisateurId" value="#{historiqueController.selected.utilisateurId}" title="#{bundle.EditHistoriqueTitle_utilisateurId}"  converter="#{utilisateursController.converter}">
+                        <f:selectItems value="#{utilisateursController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{historiqueController.update}" value="#{bundle.EditHistoriqueSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditHistoriqueViewLink}"/>
+                <br />
+                <h:commandLink action="#{historiqueController.prepareList}" value="#{bundle.EditHistoriqueShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

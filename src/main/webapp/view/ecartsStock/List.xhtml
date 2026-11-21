@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEcartsStockTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{ecartsStockController.prepareCreate}" value="#{bundle.ListEcartsStockCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{ecartsStockController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListEcartsStockEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{ecartsStockController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{ecartsStockController.pagination.pageFirstItem + 1} à #{ecartsStockController.pagination.pageLastItem + 1} sur #{ecartsStockController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{ecartsStockController.previous}" value="#{bundle.Previous} #{ecartsStockController.pagination.pageSize}" rendered="#{ecartsStockController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{ecartsStockController.next}" value="#{bundle.Next} #{ecartsStockController.pagination.pageSize}" rendered="#{ecartsStockController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{ecartsStockController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEcartsStockTitle_operationId}"/>
+                            </f:facet>
+                            <h:outputText value="#{operationsConditionnementController.libellePourId(item.operationId)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEcartsStockTitle_quantiteAttendue}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.quantiteAttendue ? item.quantiteAttendue : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEcartsStockTitle_quantiteConstatee}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.quantiteConstatee ? item.quantiteConstatee : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEcartsStockTitle_difference}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.difference ? item.difference : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEcartsStockTitle_justification}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.justification ? item.justification : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEcartsStockTitle_statut}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.statut ? item.statut : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEcartsStockTitle_validePar}"/>
+                            </f:facet>
+                            <h:outputText value="#{utilisateursController.libellePourId(item.validePar)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEcartsStockTitle_dateConstat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateConstat}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{ecartsStockController.prepareView}" value="#{bundle.ListEcartsStockViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{ecartsStockController.prepareEdit}" value="#{bundle.ListEcartsStockEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{ecartsStockController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListEcartsStockDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

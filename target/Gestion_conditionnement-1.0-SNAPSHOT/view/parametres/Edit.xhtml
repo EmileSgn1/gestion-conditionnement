@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core">
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">Modifier un réglage</ui:define>
+        <ui:define name="breadcrumb">Paramètres / Modifier</ui:define>
+        <ui:define name="body">
+            <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    <h:outputLabel value="Clé du réglage" for="cle"/>
+                    <h:outputText id="cle" value="#{parametresController.selected.cle}" styleClass="setting-key"/>
+                    <h:outputLabel value="Valeur" for="valeurBooleen" rendered="#{parametresController.selected.cle eq 'VALIDATION_AUTO_ECART'}"/>
+                    <h:selectOneMenu id="valeurBooleen" value="#{parametresController.selected.valeur}" required="true" requiredMessage="Choisissez Oui ou Non." rendered="#{parametresController.selected.cle eq 'VALIDATION_AUTO_ECART'}">
+                        <f:selectItem itemLabel="Oui" itemValue="true"/>
+                        <f:selectItem itemLabel="Non" itemValue="false"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Valeur" for="valeurNombre" rendered="#{parametresController.selected.cle eq 'SEUIL_ALERTE_DEFAUT'}"/>
+                    <h:inputText id="valeurNombre" value="#{parametresController.selected.valeur}" required="true" requiredMessage="Saisissez un nombre pour le seuil d’alerte." rendered="#{parametresController.selected.cle eq 'SEUIL_ALERTE_DEFAUT'}"/>
+                    <h:outputLabel value="Valeur" for="valeurTexte" rendered="#{parametresController.selected.cle ne 'VALIDATION_AUTO_ECART' and parametresController.selected.cle ne 'SEUIL_ALERTE_DEFAUT'}"/>
+                    <h:inputTextarea id="valeurTexte" value="#{parametresController.selected.valeur}" required="true" requiredMessage="Saisissez une valeur pour ce réglage." rows="3" rendered="#{parametresController.selected.cle ne 'VALIDATION_AUTO_ECART' and parametresController.selected.cle ne 'SEUIL_ALERTE_DEFAUT'}"/>
+                    <h:outputLabel value="Description" for="description"/>
+                    <h:inputTextarea id="description" value="#{parametresController.selected.description}" rows="3"/>
+                </h:panelGrid>
+                <div class="form-actions">
+                    <h:commandButton action="#{parametresController.update}" value="Enregistrer les modifications" styleClass="btn-primary"/>
+                    <h:link outcome="List" value="Annuler" styleClass="btn-secondary"/>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

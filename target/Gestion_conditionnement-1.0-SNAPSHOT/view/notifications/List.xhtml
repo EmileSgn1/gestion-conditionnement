@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListNotificationsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{notificationsController.prepareCreate}" value="#{bundle.ListNotificationsCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{notificationsController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListNotificationsEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{notificationsController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{notificationsController.pagination.pageFirstItem + 1} à #{notificationsController.pagination.pageLastItem + 1} sur #{notificationsController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{notificationsController.previous}" value="#{bundle.Previous} #{notificationsController.pagination.pageSize}" rendered="#{notificationsController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{notificationsController.next}" value="#{bundle.Next} #{notificationsController.pagination.pageSize}" rendered="#{notificationsController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{notificationsController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificationsTitle_utilisateurId}"/>
+                            </f:facet>
+                            <h:outputText value="#{utilisateursController.libellePourId(item.utilisateurId)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificationsTitle_titre}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.titre ? item.titre : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificationsTitle_message}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.message ? item.message : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificationsTitle_typeNotification}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.typeNotification ? item.typeNotification : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificationsTitle_lue}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lue ? 'Oui' : 'Non'}" styleClass="#{item.lue ? 'status-pill status-neutral' : 'status-pill status-warning'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificationsTitle_dateCreation}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateCreation}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{notificationsController.prepareView}" value="#{bundle.ListNotificationsViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{notificationsController.prepareEdit}" value="#{bundle.ListNotificationsEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{notificationsController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListNotificationsDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

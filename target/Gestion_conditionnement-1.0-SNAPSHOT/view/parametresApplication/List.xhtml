@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListParametresApplicationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{parametresApplicationController.prepareCreate}" value="#{bundle.ListParametresApplicationCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{parametresApplicationController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListParametresApplicationEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{parametresApplicationController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{parametresApplicationController.pagination.pageFirstItem + 1} à #{parametresApplicationController.pagination.pageLastItem + 1} sur #{parametresApplicationController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{parametresApplicationController.previous}" value="#{bundle.Previous} #{parametresApplicationController.pagination.pageSize}" rendered="#{parametresApplicationController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{parametresApplicationController.next}" value="#{bundle.Next} #{parametresApplicationController.pagination.pageSize}" rendered="#{parametresApplicationController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{parametresApplicationController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListParametresApplicationTitle_cle}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.cle ? item.cle : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListParametresApplicationTitle_valeur}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.valeur ? item.valeur : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListParametresApplicationTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.description ? item.description : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListParametresApplicationTitle_dateModification}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateModification}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{parametresApplicationController.prepareView}" value="#{bundle.ListParametresApplicationViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{parametresApplicationController.prepareEdit}" value="#{bundle.ListParametresApplicationEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{parametresApplicationController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListParametresApplicationDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

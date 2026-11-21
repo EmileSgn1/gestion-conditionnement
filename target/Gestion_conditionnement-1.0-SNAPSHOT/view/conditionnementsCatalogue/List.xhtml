@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+                </h:panelGroup>
+                <div class="list-toolbar"><h:commandLink action="#{conditionnementsCatalogueController.prepareCreate}" value="#{bundle.ListConditionnementsCatalogueCreateLink}" styleClass="btn-primary"/></div>
+                <h:panelGroup layout="block" styleClass="empty-state" rendered="#{conditionnementsCatalogueController.items.rowCount == 0}"><h:outputText escape="false" value="#{bundle.ListConditionnementsCatalogueEmpty}"/></h:panelGroup>
+                <h:panelGroup rendered="#{conditionnementsCatalogueController.items.rowCount > 0}">
+                    <h:outputText value="Affichage de #{conditionnementsCatalogueController.pagination.pageFirstItem + 1} à #{conditionnementsCatalogueController.pagination.pageLastItem + 1} sur #{conditionnementsCatalogueController.pagination.itemsCount}"/>&#160;
+                    <h:commandLink action="#{conditionnementsCatalogueController.previous}" value="#{bundle.Previous} #{conditionnementsCatalogueController.pagination.pageSize}" rendered="#{conditionnementsCatalogueController.pagination.hasPreviousPage}"/>&#160;
+                    <h:commandLink action="#{conditionnementsCatalogueController.next}" value="#{bundle.Next} #{conditionnementsCatalogueController.pagination.pageSize}" rendered="#{conditionnementsCatalogueController.pagination.hasNextPage}"/>&#160;
+                    <h:dataTable value="#{conditionnementsCatalogueController.items}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" styleClass="modern-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_code}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.code ? item.code : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_designation}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.designation ? item.designation : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_capacite}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.capacite ? item.capacite : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_uniteCapacite}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.uniteCapacite ? item.uniteCapacite : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_longueur}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.longueur ? item.longueur : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_largeur}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.largeur ? item.largeur : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_hauteur}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.hauteur ? item.hauteur : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_poids}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.poids ? item.poids : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_materiau}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.materiau ? item.materiau : '—'}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_actif}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.actif ? 'Oui' : 'Non'}" styleClass="#{item.actif ? 'status-pill status-positive' : 'status-pill status-neutral'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_dateCreation}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateCreation}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConditionnementsCatalogueTitle_typeConditionnementId}"/>
+                            </f:facet>
+                            <h:outputText value="#{not empty item.typeConditionnementId ? item.typeConditionnementId.libelle : '—'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <h:commandLink action="#{conditionnementsCatalogueController.prepareView}" value="#{bundle.ListConditionnementsCatalogueViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{conditionnementsCatalogueController.prepareEdit}" value="#{bundle.ListConditionnementsCatalogueEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{conditionnementsCatalogueController.destroy}" onclick="return confirm('Confirmer la suppression de cet élément ?');" value="#{bundle.ListConditionnementsCatalogueDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+

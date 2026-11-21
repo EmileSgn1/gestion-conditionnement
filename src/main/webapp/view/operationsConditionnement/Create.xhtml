@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Nouvelle Opération | CondiGestion</ui:define>
+        <ui:define name="breadcrumb">Opérations / Nouvelle opération</ui:define>
+
+        <ui:define name="body">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Nouvelle opération de conditionnement</h1>
+                    <p>Renseignez les matières sources, le produit fini et les quantités traitées.</p>
+                </div>
+                <h:link outcome="/view/operationsConditionnement/List" value="Retour à la liste" styleClass="btn-secondary"/>
+            </div>
+
+            <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" 
+                        layout="table"/>
+
+            <div class="form-card">
+                <h:form>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <h:outputLabel value="Référence du lot" for="reference" />
+                            <h:inputText id="reference" value="#{operationsConditionnementController.selected.reference}" 
+                                         pt:placeholder="Saisir la référence" required="true" requiredMessage="La référence est obligatoire."/>
+                        </div>
+
+                        <div class="form-group">
+                        </div>
+
+                        <!-- ARTICLE SOURCE -->
+                        <div class="form-group">
+                            <h:outputLabel value="Article source (matière première)" for="articleSourceId" />
+                            <h:selectOneMenu id="articleSourceId" value="#{operationsConditionnementController.selected.articleSourceId}"
+                                             converter="#{articlesController.converter}">
+                                <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </div>
+
+                        <!-- ARTICLE PRODUIT -->
+                        <div class="form-group">
+                            <h:outputLabel value="Article produit (produit fini)" for="articleProduitId" />
+                            <h:selectOneMenu id="articleProduitId" value="#{operationsConditionnementController.selected.articleProduitId}"
+                                             converter="#{articlesController.converter}">
+                                <f:selectItems value="#{articlesController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </div>
+
+                        <!-- CONDITIONNEMENT -->
+                        <div class="form-group">
+                            <h:outputLabel value="Type de conditionnement" for="conditionnementId" />
+                            <h:selectOneMenu id="conditionnementId" value="#{operationsConditionnementController.selected.conditionnementId}"
+                                             converter="#{conditionnementsController.converter}">
+                                <f:selectItems value="#{conditionnementsController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel value="Nombre de conditionnements" for="nombreConditionnements" />
+                            <h:inputText id="nombreConditionnements" value="#{operationsConditionnementController.selected.nombreConditionnements}" 
+                                         pt:placeholder="Saisir un nombre"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel value="Quantité consommée" for="quantiteConsommee" />
+                            <h:inputText id="quantiteConsommee" value="#{operationsConditionnementController.selected.quantiteConsommee}" 
+                                         pt:placeholder="Saisir une quantité"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel value="Quantité produite" for="quantiteProduite" />
+                            <h:inputText id="quantiteProduite" value="#{operationsConditionnementController.selected.quantiteProduite}" 
+                                         pt:placeholder="Saisir une quantité"/>
+                        </div>
+
+                        <!-- UTILISATEUR -->
+                        <div class="form-group">
+                            <h:outputLabel value="Opérateur / Utilisateur" for="utilisateurId" />
+                            <h:selectOneMenu id="utilisateurId" value="#{operationsConditionnementController.selected.utilisateurId}"
+                                             converter="#{utilisateursController.converter}">
+                                <f:selectItems value="#{utilisateursController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Commentaire / Observations" for="commentaire" />
+                        <h:inputTextarea id="commentaire" rows="3" value="#{operationsConditionnementController.selected.commentaire}" 
+                                         pt:placeholder="Commentaire facultatif"/>
+                    </div>
+
+                    <div class="form-actions">
+                        <h:commandButton action="#{operationsConditionnementController.create}" value="Enregistrer l&#39;opération" styleClass="btn-primary"/>
+                        <h:commandLink action="#{operationsConditionnementController.prepareList}" value="Annuler" immediate="true" styleClass="btn-secondary"/>
+                    </div>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+
+
+
+
+

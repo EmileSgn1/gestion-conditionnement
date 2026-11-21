@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditArticlesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditArticlesLabel_reference}" for="reference" />
+                    <h:inputText id="reference" value="#{articlesController.selected.reference}" title="#{bundle.EditArticlesTitle_reference}" required="true" requiredMessage="#{bundle.EditArticlesRequiredMessage_reference}"/>
+                    <h:outputLabel value="#{bundle.EditArticlesLabel_nom}" for="nom" />
+                    <h:inputText id="nom" value="#{articlesController.selected.nom}" title="#{bundle.EditArticlesTitle_nom}" required="true" requiredMessage="#{bundle.EditArticlesRequiredMessage_nom}"/>
+                    <h:outputLabel value="#{bundle.EditArticlesLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{articlesController.selected.description}" title="#{bundle.EditArticlesTitle_description}" />
+                    <h:outputLabel value="#{bundle.EditArticlesLabel_actif}" for="actif" />
+                    <h:selectBooleanCheckbox id="actif" value="#{articlesController.selected.actif}"/>
+                    <h:outputLabel value="#{bundle.EditArticlesLabel_prix}" for="prix" />
+                    <h:inputText id="prix" value="#{articlesController.selected.prix}" title="#{bundle.EditArticlesTitle_prix}" required="true" requiredMessage="#{bundle.EditArticlesRequiredMessage_prix}"/>
+                    <h:outputLabel value="#{bundle.EditArticlesLabel_stockMin}" for="stockMin" />
+                    <h:inputText id="stockMin" value="#{articlesController.selected.stockMin}" title="#{bundle.EditArticlesTitle_stockMin}" required="true" requiredMessage="#{bundle.EditArticlesRequiredMessage_stockMin}"/>
+                    <h:outputLabel value="#{bundle.EditArticlesLabel_categorieId}" for="categorieId" />
+                    <h:selectOneMenu id="categorieId" value="#{articlesController.selected.categorieId}" title="#{bundle.EditArticlesTitle_categorieId}"  converter="#{categoriesController.converter}">
+                        <f:selectItems value="#{categoriesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditArticlesLabel_uniteId}" for="uniteId" />
+                    <h:selectOneMenu id="uniteId" value="#{articlesController.selected.uniteId}" title="#{bundle.EditArticlesTitle_uniteId}"  converter="#{unitesController.converter}">
+                        <f:selectItems value="#{unitesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{articlesController.update}" value="#{bundle.EditArticlesSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditArticlesViewLink}"/>
+                <br />
+                <h:commandLink action="#{articlesController.prepareList}" value="#{bundle.EditArticlesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+

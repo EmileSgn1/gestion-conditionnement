@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:composition template="../../template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditNotificationsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorClass="message-error" infoClass="message-success" warnClass="message-warning" fatalClass="message-error" styleClass="app-messages" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="form-grid">
+                    
+                    <h:outputLabel value="#{bundle.EditNotificationsLabel_utilisateurId}" for="utilisateurId" />
+                    <h:selectOneMenu id="utilisateurId" value="#{notificationsController.selected.utilisateurId}" converter="#{notificationsController.converter}"><f:selectItems value="#{utilisateursController.itemsAvailableSelectOneByIdBigInteger}" /></h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditNotificationsLabel_titre}" for="titre" />
+                    <h:inputText id="titre" value="#{notificationsController.selected.titre}" title="#{bundle.EditNotificationsTitle_titre}" required="true" requiredMessage="#{bundle.EditNotificationsRequiredMessage_titre}"/>
+                    <h:outputLabel value="#{bundle.EditNotificationsLabel_message}" for="message" />
+                    <h:inputText id="message" value="#{notificationsController.selected.message}" title="#{bundle.EditNotificationsTitle_message}" required="true" requiredMessage="#{bundle.EditNotificationsRequiredMessage_message}"/>
+                    <h:outputLabel value="#{bundle.EditNotificationsLabel_typeNotification}" for="typeNotification" />
+                    <h:inputText id="typeNotification" value="#{notificationsController.selected.typeNotification}" title="#{bundle.EditNotificationsTitle_typeNotification}" required="true" requiredMessage="#{bundle.EditNotificationsRequiredMessage_typeNotification}"/>
+                    <h:outputLabel value="#{bundle.EditNotificationsLabel_lue}" for="lue" />
+                    <h:selectBooleanCheckbox id="lue" value="#{notificationsController.selected.lue}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{notificationsController.update}" value="#{bundle.EditNotificationsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditNotificationsViewLink}"/>
+                <br />
+                <h:commandLink action="#{notificationsController.prepareList}" value="#{bundle.EditNotificationsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+
+
+
