@@ -5,7 +5,7 @@ COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Étape 2 : WildFly + module JDBC PostgreSQL + Datasource JNDI
+# Étape 2 : WildFly + module JDBC PostgreSQL + Datasource JNDI au démarrage
 FROM quay.io/wildfly/wildfly:latest
 ENV JAVA_OPTS="-Xms128m -Xmx320m -Djboss.bind.address=0.0.0.0 -Djboss.bind.address.management=0.0.0.0"
 
@@ -21,11 +21,12 @@ RUN mkdir -p /opt/jboss/wildfly/modules/system/layers/base/org/postgresql/main &
 
 USER jboss
 
-# Ajoute le driver et la datasource gestion_conditionnement_db dans standalone.xml
-RUN /opt/jboss/wildfly/bin/jboss-cli.sh --connect --command="embed-server, \
-  /subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql,driver-class-name=org.postgresql.Driver), \
-  data-source add --name=gestion_conditionnement_db --jndi-name=java:jboss/datasources/gestion_conditionnement_db --driver-name=postgresql --connection-url=jdbc:postgresql://${env.DB_HOST}:${env.DB_PORT}/${env.DB_NAME}?sslmode=require --user-name=${env.DB_USER} --password=${env.DB_PASS} --validate-on-match=true --background-validation=false, \
-  stop-embedded-server"
-
 EXPOSE 8080
-CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+
+CMD ["/bin/sh", "-c", "\
+  /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 & \
+  WF_PID=$!; \
+  until /opt/jboss/wildfly/bin/jboss-cli.sh --connect --command=':read-attribute(name=server-state)' 2>/dev/null | grep -q 'running'; do sleep 2; done; \
+  /opt/jboss/wildfly/bin/jboss-cli.sh --connect --command=\"/subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql,driver-class-name=org.postgresql.Driver)\" 2>/dev/null || true; \
+  /opt/jboss/wildfly/bin/jboss-cli.sh --connect --command=\"data-source add --name=gestion_conditionnement_db --jndi-name=java:jboss/datasources/gestion_conditionnement_db --driver-name=postgresql --connection-url=jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require --user-name=${DB_USER} --password=${DB_PASS} --validate-on-match=true --background-validation=false\" 2>/dev/null || true; \
+  wait $WF_PID"]
