@@ -2,11 +2,11 @@
 set -e
 
 XML_PATH="/opt/jboss/wildfly/standalone/configuration/standalone.xml"
-DB_HOST="${DB_HOST:-}"
+DB_HOST="${DB_HOST:-dpg-dc1hp5lg1s2s73ddll6g-a.frankfurt-postgres.render.com}"
 DB_PORT="${DB_PORT:-5432}"
 DB_NAME="${DB_NAME:-gestion_conditionnement_db}"
-DB_USER="${DB_USER:-}"
-DB_PASS="${DB_PASS:-}"
+DB_USER="${DB_USER:-gestion_conditionnement_db_user}"
+DB_PASS="${DB_PASS:-Vk1RprDX3ugWNYJPSoOQJRVn3feGNjO1}"
 
 if ! grep -q "gestion_conditionnement_db" "$XML_PATH"; then
   DRIVER_FILE=$(mktemp)
